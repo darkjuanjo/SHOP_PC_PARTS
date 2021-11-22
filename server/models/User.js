@@ -1,4 +1,4 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
@@ -23,7 +23,8 @@ const userSchema = new Schema(
     history: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Purchase'
+        ref: 'Purchase',
+        default: []
       }
     ],
   }

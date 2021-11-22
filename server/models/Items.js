@@ -1,10 +1,11 @@
-const { Schema } = require('mongoose');
+const { Schema, model, Types } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
 const ItemSchema = new Schema(
   {
     name: {
       type: String,
+      unique: true,
       required: true,
       maxlength: 280
     },
@@ -25,7 +26,7 @@ const ItemSchema = new Schema(
       type: Number,
       required: true
     },    
-    createdAt: {
+    AddedAt: {
       type: Date,
       default: Date.now,
       get: timestamp => dateFormat(timestamp)
@@ -37,5 +38,5 @@ const ItemSchema = new Schema(
     }
   }
 );
-
-module.exports = ItemSchema;
+const Items = model('Items', ItemSchema);
+module.exports = Items;
