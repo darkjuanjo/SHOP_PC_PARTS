@@ -1,7 +1,7 @@
 const { Schema, model, Types } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
-const CartSchema = new Schema(
+const Items = new Schema(
   {
   BoughtId: {
       type: Schema.Types.ObjectId,
@@ -24,7 +24,7 @@ const CartSchema = new Schema(
 
 const purchaseSchema = new Schema(
   {
-    item: [CartSchema],
+    item: [Items],
     BoughtAt: {
       type: Date,
       default: Date.now,
@@ -36,6 +36,10 @@ const purchaseSchema = new Schema(
       unique: true,
       trim: true
     },
+    qtybought: {
+      type: Number,
+      required: true
+    }
   },
   {
     toJSON: {

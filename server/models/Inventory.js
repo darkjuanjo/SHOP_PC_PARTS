@@ -1,7 +1,7 @@
 const { Schema, model, Types } = require('mongoose');
 const dateFormat = require('../utils/dateFormat');
 
-const ItemSchema = new Schema(
+const InventorySchema = new Schema(
   {
     name: {
       type: String,
@@ -38,5 +38,5 @@ const ItemSchema = new Schema(
     }
   }
 );
-const Items = model('Items', ItemSchema);
-module.exports = Items;
+const Inventory = model('Inventory', InventorySchema);
+module.exports = Inventory;

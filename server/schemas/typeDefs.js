@@ -1,7 +1,7 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-type Bought {
+input Bought {
   _id: ID
   item: String
   qty: Int
@@ -9,7 +9,7 @@ type Bought {
 
 type Purchase {
   _id: ID
-  item: [Bought]
+  items: [Purchase]
   BoughtAt: String
 }
 
@@ -64,9 +64,11 @@ type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     addItem(name: String!, cost: String!, category: String!, description: String!, stock: Int!): Item
-    addCart(item: String!, qty: Int!): Bought
-    addPurchase(item: [Bought]!): Purchase
+    addCart(item: String!, qty: Int!): Purchase
+    addPurchase(item: Bought!): Purchase
   }
 `;
 
 module.exports = typeDefs;
+/*that was an example I found while searching...If I were 
+to implement it in my code I think I would be like this:*/

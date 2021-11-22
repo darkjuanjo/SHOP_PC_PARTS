@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Items, Purchase } = require('../models');
+const { User, Inventory, Purchase } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -27,10 +27,10 @@ const resolvers = {
     },
     items: async (parent, { category }) => {
       const params = category ? { category } : {};
-      return Items.find(params).sort({ AddedAt: -1 });
+      return Inventory.find(params).sort({ AddedAt: -1 });
     },
     item: async (parent, { name }) => {
-      return Items.findOne({ name });
+      return Inventory.findOne({ name });
     }
   },
 
@@ -58,12 +58,12 @@ const resolvers = {
       return { token, user };
     },
     addItem: async (parent, args) => {
-      const item = await Items.create(args);
+      const item = await Inventory.create(args);
       return item;
     },
     addCart: async (parent, args, context) => {
       if (context.user) {
-        const item = await BoughtSchema.create({ ...args, username: context.user.username });
+        const item = await Items.create({ ...args, username: context.user.username });
         return item;
       }
 

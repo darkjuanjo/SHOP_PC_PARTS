@@ -1,10 +1,10 @@
 const faker = require('faker');
 
 const db = require('../config/connection');
-const { Items, User } = require('../models');
+const { User, Inventory } = require('../models');
 
 db.once('open', async () => {
-  await Items.deleteMany({});
+  await Inventory.deleteMany({});
   await User.deleteMany({});
 
   // create user data
@@ -45,7 +45,7 @@ db.once('open', async () => {
     },
 
   ]
-  Items.collection.insertMany(CreatedItems);
+  Inventory.collection.insertMany(CreatedItems);
 
   console.log('all done!');
   process.exit(0);
