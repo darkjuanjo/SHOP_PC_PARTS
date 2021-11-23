@@ -1,12 +1,12 @@
 import React from "react";
 
 function Category(props){
-    const {categories} = props;
+    const {category} = props;
     return (
         <div>
-            <img className="small" src={categories.image} alt={categories.name}></img>
-            <h3>{categories.name}</h3>
-            <div>${categories.price}</div>
+            <img className="small" src={category.image} alt={category.name}></img>
+            <h3>{category.name}</h3>
+            <div>${category.price}</div>
             <div>
                 <button>Add to Cart</button>
             </div>
