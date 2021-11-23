@@ -23,12 +23,25 @@ function App() {
       setCartItems([...cartItems, {...category, qty: 1 }]);
     }
   };
+  const onRemove = (category) => {
+    const exist = cartItems.find((x) => x.id === category.id);
+    if(exist.qty === 1) {
+      setCartItems(cartItems.filter((x) => x.id !== category.id));
+    } else {
+      setCartItems(
+        cartItems.map(x =>
+          x.id === category.id ? { ...exist, qty: exist.qty - 1 } : x
+        )
+      );
+
+    }
+  }
   return (
     <div className="App">
       <Header></Header>
       <div className="row">
         <Main onAdd={onAdd} categories={categories}></Main>
-        <Cart onAdd={onAdd} cartItems={cartItems}></Cart>
+        <Cart onAdd={onAdd} onRemove={onRemove} cartItems={cartItems}></Cart>
         
       </div>
      {/* <About></About> */}
