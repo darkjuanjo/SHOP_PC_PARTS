@@ -4,7 +4,7 @@ import Main from './components/Main/Main';
 import Cart from './components/Cart/Cart';
 import data from './Data/data';
 import { useState } from 'react';
-// import About from './components/About';
+import About from './components/About/index';
 
 
 
@@ -38,13 +38,14 @@ function App() {
   }
   return (
     <div className="App">
-      <Header></Header>
+      <Header countCartItems={cartItems.length}></Header>
+      <About></About>
       <div className="row">
         <Main onAdd={onAdd} categories={categories}></Main>
         <Cart onAdd={onAdd} onRemove={onRemove} cartItems={cartItems}></Cart>
         
       </div>
-     {/* <About></About> */}
+    
     </div>
   );
 }
