@@ -3,7 +3,7 @@ import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 
-function LoginForm() {
+function LoginForm(prop) {
     const [formState, setFormState] = useState({ email: '', password: '' });
     const [login, { error }] = useMutation(LOGIN_USER);
     const { email, password } = formState;
@@ -17,13 +17,10 @@ function LoginForm() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        console.log(formState)
-
         try {
             const { data } = await login({
-              variables: { ...formState }
+              variables: {email,password }
             });
-
             Auth.login(data.login.token);
           } catch (e) {
             console.error(e);
@@ -55,7 +52,7 @@ function LoginForm() {
             </form>
 
             {/* Display error message if there is an error  */}
-            {/* {error && <div>Login failed</div>} */}
+            {error && <div>Login failed</div>}
         </section>
     )
 }

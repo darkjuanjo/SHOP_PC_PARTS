@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Modal from '../Modal';
+import { Link } from 'react-router-dom';
 
 function Nav() {
 
@@ -13,9 +14,9 @@ function Nav() {
         <header className="flex-row px-1">
             {isModalOpen && <Modal onClose={toggleModal} />}
             <h2>
-                <a data-testid="link" href="/">
+                <Link to="/">
                     <span>Shop PC Parts</span>
-                </a>
+                </Link>
             </h2>
             <nav>
                 {/* Nav options can go in here */}
