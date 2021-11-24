@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Header(props) {
     const { countCartItems } = props;
+    const location = useLocation();
     return (
         <header className="row block center">
             <div>
@@ -13,16 +14,18 @@ function Header(props) {
                 </Link>
             </div>
             <div>
+            <Link to="/Cart">
                 <a href="#/cart">
 
-                    Cart {' '}
+                    Cart {'    '}
                     {countCartItems ? (
                         <button className="badge">{countCartItems}</button>
                     ) : (
                         ''
-                    )};
+                    )}
 
-                </a> {' '}
+                </a>
+                </Link> {'    '}
                 <Link to="/LoginForm">Sign In</Link>
             </div>
         </header>

@@ -10,7 +10,31 @@ function Nav() {
     }
 
     return (
-        <header className="flex-row px-1">
+
+    //     <header className="row block center">
+    //     <div>
+    //         <Link to="/">
+    //             <a href="#/">
+    //                 <h1>Shop PC Parts</h1>
+    //             </a>
+    //         </Link>
+    //     </div>
+    //     <div>
+    //         <a href="#/cart">
+
+    //             Cart {' '}
+    //             {countCartItems ? (
+    //                 <button className="badge">{countCartItems}</button>
+    //             ) : (
+    //                 ''
+    //             )}
+
+    //         </a> {' '}
+    //         <Link to="/LoginForm">Sign In</Link>
+    //     </div>
+    // </header>
+
+        <header className="row block center">
             {isModalOpen && <Modal onClose={toggleModal} />}
             <h2>
                 <a data-testid="link" href="/">

@@ -22,6 +22,11 @@ a {
 }
 
 
+.flex-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .row {
   display:flex;
   justify-content: space-around; 
@@ -41,7 +46,7 @@ a {
 }
 
 .block {
-  background-color: #e0e0e0;
+  background-color: #718a99;
   padding: 1 rem;
   margin: 0.5 rem;
   border-radius: 0.5 rem;

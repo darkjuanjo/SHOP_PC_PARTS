@@ -6,7 +6,7 @@ import { useState } from 'react';
 import About from './components/About/index';
 import LoginForm from './components/Login';
 import Nav from './components/Nav';
-import { BrowserRouter, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import StripeContainer from './components/StripeContainer/StripeContainer';
 
 
@@ -48,7 +48,6 @@ function App() {
   return (
     <Router>
       <div className="App">
-        {/* <About></About> */}
         <Switch>
           <Route exact path="/LoginForm" render={() =>
             <>
@@ -68,8 +67,19 @@ function App() {
                 <About></About>
                 <div className="row">
                   <Main onAdd={onAdd} categories={categories}></Main>
-                  <Cart onAdd={onAdd} onRemove={onRemove} cartItems={cartItems}></Cart>
+                  {/* <Cart onAdd={onAdd} onRemove={onRemove} cartItems={cartItems}></Cart> */}
                 </div>
+              </div>
+            </>
+          }
+          />
+          <Route exact path="/Cart" render={() =>
+            <>
+              <div className="App">
+                <Header countCartItems={cartItems.length}></Header>
+                <main>
+                  <Cart onAdd={onAdd} onRemove={onRemove} cartItems={cartItems}></Cart>
+                </main>
               </div>
             </>
           }
