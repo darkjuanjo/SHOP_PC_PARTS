@@ -1,3 +1,4 @@
+import React from 'react';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import Cart from './components/Cart/Cart';
@@ -9,7 +10,7 @@ import Nav from './components/Nav';
 // import ApolloClient from 'apollo-boost';
 // import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
-import { BrowserRouter, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import StripeContainer from './components/StripeContainer/StripeContainer';
 
 const httpLink = createHttpLink({

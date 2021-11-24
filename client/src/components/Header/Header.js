@@ -7,13 +7,11 @@ function Header(props) {
         <header className="row block center">
             <div>
                 <Link to="/">
-                    <a href="#/">
-                        <h1>Shop PC Parts</h1>
-                    </a>
+                    <h1>Shop PC Parts</h1>
                 </Link>
             </div>
             <div>
-                <a href="#/cart">
+                <Link to="#/cart">
 
                     Cart {' '}
                     {countCartItems ? (
@@ -22,7 +20,7 @@ function Header(props) {
                         ''
                     )};
 
-                </a> {' '}
+                </Link> {' '}
                 <Link to="/LoginForm">Sign In</Link>
             </div>
         </header>
