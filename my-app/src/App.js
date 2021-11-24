@@ -4,16 +4,16 @@ import Cart from './components/Cart/Cart';
 import data from './Data/data';
 import { useState } from 'react';
 import About from './components/About/index';
-import LoginForm from './components/Login/LoginForm';
+// import Modal from 'react-modal';
+// import LoginForm from './components/Login/LoginForm';
 // import StripeContainer from './components/StripeContainer/StripeContainer';
 
 
 function App() {
-  const adminUser = {
-    email:"admin@mail.com",
-    password:"admin123"
-  }
-
+  // const adminUser = {
+  //   email:"admin@mail.com",
+  //   password:"admin123"
+  // }
   // const [showItem, setShowItem] = useState(false)
   const { categories } = data;
   const [cartItems, setCartItems] = useState( [] );
@@ -42,6 +42,7 @@ function App() {
 
     }
   }
+  // const [modalIsOpen, setModalOpen] = useState(false)
   return (
     <div className="App">
       <Header countCartItems={cartItems.length}></Header>

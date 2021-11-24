@@ -52,7 +52,7 @@ function Cart(props) {
                         {showItem ? <StripeContainer /> :  <button onClick={() => setShowItem(true)}>
                         Checkout
                     </button> }
-                    <button>Clear</button>
+                    
                 </div>
                 </>
             )}

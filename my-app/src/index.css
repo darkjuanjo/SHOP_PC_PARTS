@@ -98,3 +98,44 @@ button.badge {
 .payForm {
   width: 100%;
 }
+.signIn {
+  font-size:0.9rem;
+  padding: 0.2rem;
+  margin:0.1rem;
+  border-radius:0.5rem;
+  border:none;
+  background-color:#e0e0e0;
+  color:darkblue;
+  cursor: pointer;
+}
+
+.modalBtn, .modalTitle{
+  margin-left: 23rem;
+  margin-top: 4rem;
+   font-size: 20px;
+}
+.modaltxt {
+  margin: 32px 0px -32px 277px;
+  font-size: 17px;
+}
+.form-inner {
+  align-items: flex-start;
+  margin: 4rem 0 0 17rem;
+  
+}
+
+#name, #password {
+  margin-right:10rem;
+ width: 50%;
+}
+.user {
+  margin-right:5rem;
+  font-size: 17px;
+  
+}
+.form-group {
+  
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}

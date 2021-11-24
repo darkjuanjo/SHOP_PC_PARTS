@@ -36,7 +36,7 @@ export default function PaymentForm() {
     if(!error) {
         try {
           const {id} = paymentMethod
-          const response = await axios.post("http://localhost:5001/payment", {
+          const response = await axios.post("https://localhost:5001/payment", {
               amount: 1000,
               id
           })  
@@ -63,7 +63,7 @@ export default function PaymentForm() {
                 </div>
             
             </fieldset>
-            <button onClick={()=> setSuccess}>Pay</button>
+            <button onClick={()=> handleSubmit}>Pay</button>
         </form>
         :
         <div>
