@@ -1,5 +1,6 @@
 const { Schema, model, Types } = require('mongoose');
 const bcrypt = require('bcrypt');
+// const Order = require('./index');
 
 const userSchema = new Schema(
   {
@@ -20,13 +21,10 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
-    history: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Purchase',
-        default: []
-      }
-    ],
+    orders: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Order'
+    }],
   }
 );
 

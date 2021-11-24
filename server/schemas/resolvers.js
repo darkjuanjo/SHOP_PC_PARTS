@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Inventory, Purchase } = require('../models');
+const { User, Inventory, Product, Order } = require('../models');
 const { signToken } = require('../utils/auth');
 
 const resolvers = {
@@ -31,6 +31,34 @@ const resolvers = {
     },
     item: async (parent, { name }) => {
       return Inventory.findOne({ name });
+    },
+    getOrder: async (parent, {order}, context) => {
+      if(context.user) {
+       return await Order.findById({ _id:order }) //find the order
+       .then(response => { 
+  return Product.find({ '_id':{$in: response.products}}) //this returns list of products id
+        .then(items => {
+          let _id = [];
+          let qty = [];
+          items.forEach(item => {
+            _id.push(item.product);
+            qty.push(item.qty);
+          });
+    return Inventory.find({'_id':{$in:_id}})
+          .then(items => {
+            const purchase_array = [];
+            items.forEach((item,i) => {
+              const purchase = {
+                item: item,
+                qty:  qty[i]
+              }
+              purchase_array.push(purchase);
+            });
+            return purchase_array;
+          });      
+        });
+       })
+      }
     }
   },
 
@@ -57,33 +85,24 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addItem: async (parent, args) => {
+    add_to_Inventory: async (parent, args) => {
       const item = await Inventory.create(args);
       return item;
     },
-    addCart: async (parent, args, context) => {
-      if (context.user) {
-        const item = await Items.create({ ...args, username: context.user.username });
-        return item;
-      }
+    addOrder: async (parent, {product, cost}, context) => {
+      if(context.user) {
+        ids = [];
+        const products = await Product.insertMany(product);
+              products.forEach(product => ids.push(product._id));
 
-      throw new AuthenticationError('You need to be logged in!');
-    },
-    addPurchase: async (parent, args, context) => {
-      if (context.user) {
-        const purchase = await Purchase.create({ ...args, username: context.user.username });
-
-        await User.findByIdAndUpdate(
+        const order = await Order.create({products:products, OrderCost:cost});
+        return await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { history: purchase._id } },
+          { $push: { orders : order._id } },
           { new: true }
         );
-
-        return purchase;
       }
-
-      throw new AuthenticationError('You need to be logged in!');
-    }
+    },
   }
 };
 

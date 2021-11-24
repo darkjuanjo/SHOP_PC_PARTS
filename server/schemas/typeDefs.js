@@ -1,30 +1,27 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-input Bought {
-  _id: ID
-  item: String
+input Order {
+  product: ID
   qty: Int
 }
 
-type Purchase {
+type Product {
   _id: ID
-  items: [Purchase]
-  BoughtAt: String
 }
 
 type Users {
   _id: ID
   username: String
   email: String
-  history: [Purchase]
+  orders: [String]
 }
 
 type User {
     _id: ID
     username: String
     email: String
-    history: [Purchase]
+    orders: [Product]
 }
 
 type Items {
@@ -47,6 +44,11 @@ type Item {
     AddedAt: String
 }
 
+type Purchased {
+  item: Item
+  qty: Int
+}
+
 type Auth {
     token: ID!
     user: User
@@ -58,17 +60,15 @@ type Query {
     user(username: String!): User
     items(category: String): [Items]
     item(name: String!): Item
+    getOrder(order: String!): [Purchased]
 }
 
 type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    addItem(name: String!, cost: String!, category: String!, description: String!, stock: Int!): Item
-    addCart(item: String!, qty: Int!): Purchase
-    addPurchase(item: Bought!): Purchase
+    add_to_Inventory(name: String!, cost: String!, category: String!, description: String!, stock: Int!): Item
+    addOrder(product: [Order]!, cost: Int!): User
   }
 `;
 
 module.exports = typeDefs;
-/*that was an example I found while searching...If I were 
-to implement it in my code I think I would be like this:*/
