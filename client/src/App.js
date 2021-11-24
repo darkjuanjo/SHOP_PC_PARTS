@@ -6,22 +6,19 @@ import { useState } from 'react';
 import About from './components/About/index';
 import LoginForm from './components/Login';
 import Nav from './components/Nav';
-import { ApolloProvider } from '@apollo/react-hooks';
-import ApolloClient from 'apollo-boost';
+// import ApolloClient from 'apollo-boost';
+// import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { BrowserRouter, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import StripeContainer from './components/StripeContainer/StripeContainer';
 
-const client = new ApolloClient({
-  request: operation => {
-    const token = localStorage.getItem('id_token');
+const httpLink = createHttpLink({
+  uri: '/graphql',
+});
 
-    operation.setContext({
-      headers: {
-        authorization: token ? `Bearer ${token}` : ''
-      }
-    });
-  },
-  uri: '/graphql'
+const client = new ApolloClient({
+  link: httpLink,
+  cache: new InMemoryCache(),
 });
 
 function App() {
