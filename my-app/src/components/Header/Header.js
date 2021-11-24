@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Header(props) {
     const { countCartItems } = props;
-    const location = useLocation();
+    // const location = useLocation();
     return (
         <header className="row block center">
             <div>
