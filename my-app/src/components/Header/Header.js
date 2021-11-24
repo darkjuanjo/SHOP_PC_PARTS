@@ -8,7 +8,7 @@ function Header(props) {
     const [modalIsOpen, setModalIsOpen] = useState(false)
     return (
         <header className="row block center">
-            <img src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/000000/external-computer-sales-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png" />
+            <img src="https://img.icons8.com/external-vitaliy-gorbachev-lineal-color-vitaly-gorbachev/60/000000/external-computer-sales-vitaliy-gorbachev-lineal-color-vitaly-gorbachev.png" alt="icon" />
             
             <div>
                 
