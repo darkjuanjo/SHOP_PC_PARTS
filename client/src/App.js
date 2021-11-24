@@ -1,53 +1,30 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { ApolloProvider } from '@apollo/react-hooks';
-import ApolloClient from 'apollo-boost';
+// This App.js file is the center of the application. Think of App.js as the root component, 
+// or the wrapper component that houses all of the other components. To effect any change on 
+// the application, we need to either modify this file or add components inside it.
+import LoginForm from './components/Login';
+import Nav from './components/Nav';
 
-import Header from './components/Header';
-import Footer from './components/Footer';
-
-import Home from './pages/Home';
-import Login from './pages/Login';
-import NoMatch from './pages/NoMatch';
-import SingleThought from './pages/SingleThought';
-import Profile from './pages/Profile';
-import Signup from './pages/Signup';
-
-const client = new ApolloClient({
-  request: operation => {
-    const token = localStorage.getItem('id_token');
-
-    operation.setContext({
-      headers: {
-        authorization: token ? `Bearer ${token}` : ''
-      }
-    });
-  },
-  uri: '/graphql'
-});
-
+// To allow for Gallery to be a child of Nav, we "lift" the state by adding 3 things:
+// First, declare categories using the useState.
+// Then, set currentCategory with its setter using useState.
+// Finally, edit the nav componenent to have the variables as shown
 function App() {
-  return (
-    <ApolloProvider client={client}>
-      <Router>
-        <div className="flex-column justify-flex-start min-100-vh">
-          <Header />
-          <div className="container">
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/signup" component={Signup} />
-              <Route exact path="/profile/:username?" component={Profile} />
-              <Route exact path="/thought/:id" component={SingleThought} />
 
-              <Route component={NoMatch} />
-            </Switch>
-          </div>
-          <Footer />
-        </div>
-      </Router>
-    </ApolloProvider>
+  // To pass Props to child elements, the declarations go INSIDE the opening tag of the component
+  // It's almost like making a function call. When you make a call, you pass parameters. That's 
+  // what happens when you declare Props inside an opening tag, such as what's inside the <Nav> opener.
+  return (
+    <div>
+      {/* Passing the getter and setter functions into the Nav component will allow the components
+      to modify their states in the App component, which will conditionally render based on the user's selection. */}
+      <Nav></Nav>
+      <main>
+          <LoginForm></LoginForm>
+      </main>
+    </div>
   );
 }
 
 export default App;
+
+
