@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
+import StripeContainer from "../StripeContainer/StripeContainer";
+
 
 function Cart(props) {
+    const [showItem, setShowItem] = useState(false)
     const { cartItems, onAdd, onRemove } = props;
     const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
     const taxPrice = itemsPrice * 0.14;
@@ -45,9 +48,10 @@ function Cart(props) {
                 </div>
                 <hr/>
                 <div className="row">
-                    <button onClick={() => alert('Click to Checkout')}>
+                    
+                        {showItem ? <StripeContainer /> :  <button onClick={() => setShowItem(true)}>
                         Checkout
-                    </button>
+                    </button> }
                 </div>
                 </>
             )}

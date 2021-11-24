@@ -94,3 +94,7 @@ button.badge {
   display:inline-block;
   justify-content:space-evenly;
 }
+
+.payForm {
+  width: 100%;
+}

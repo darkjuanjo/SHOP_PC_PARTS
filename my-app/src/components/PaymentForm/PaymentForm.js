@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import axios from "axios"
+import axios from "axios";
 
 const CARD_OPTIONS = {
     iconStyle: "solid",
@@ -56,14 +56,14 @@ export default function PaymentForm() {
     return (
         <>
         {!success ? 
-        <form onSubmit={handleSubmit}>
+        <form className="payForm" onSubmit={handleSubmit}>
             <fieldset className="FormGroup">
                 <div className="FormRow">
                     <CardElement options={CARD_OPTIONS}/>
                 </div>
             
             </fieldset>
-            <button>Pay</button>
+            <button onClick={()=> setSuccess}>Pay</button>
         </form>
         :
         <div>
