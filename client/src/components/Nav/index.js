@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+// import { Link, Router } from 'react-router-dom';
 import Modal from '../Modal';
 
 function Nav() {
@@ -30,7 +31,7 @@ function Nav() {
                     </li>
                 </ul>
             </nav>
-        </header>
+        </header >
     );
 }
 
