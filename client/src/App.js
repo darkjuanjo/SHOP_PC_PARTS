@@ -6,9 +6,23 @@ import { useState } from 'react';
 import About from './components/About/index';
 import LoginForm from './components/Login';
 import Nav from './components/Nav';
+import { ApolloProvider } from '@apollo/react-hooks';
+import ApolloClient from 'apollo-boost';
 import { BrowserRouter, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import StripeContainer from './components/StripeContainer/StripeContainer';
 
+const client = new ApolloClient({
+  request: operation => {
+    const token = localStorage.getItem('id_token');
+
+    operation.setContext({
+      headers: {
+        authorization: token ? `Bearer ${token}` : ''
+      }
+    });
+  },
+  uri: '/graphql'
+});
 
 function App() {
   // const adminUser = {
@@ -46,9 +60,9 @@ function App() {
     }
   }
   return (
+  <ApolloProvider client={client}>
     <Router>
       <div className="App">
-        {/* <About></About> */}
         <Switch>
           <Route exact path="/LoginForm" render={() =>
             <>
@@ -75,11 +89,10 @@ function App() {
           }
           />
         </Switch>
-        {/* <Main onAdd={onAdd} categories={categories}></Main> */}
-        {/* <Cart onAdd={onAdd} onRemove={onRemove} cartItems={cartItems}></Cart> */}
         {/* {showItem ? <StripeContainer /> : <button onClick={() => setShowItem(true)}>Purchase</button>} */}
       </div>
     </Router>
+  </ApolloProvider>
   );
 }
 export default App;
