@@ -5,10 +5,11 @@ import Cart from './components/Cart/Cart';
 import data from './Data/data';
 import { useState } from 'react';
 import About from './components/About/index';
-
+import StripeContainer from './components/StripeContainer/StripeContainer';
 
 
 function App() {
+  const [showItem, setShowItem] = useState(false)
   const { categories } = data;
   const [cartItems, setCartItems] = useState( [] );
   const onAdd = (category) => {
@@ -43,6 +44,7 @@ function App() {
       <div className="row">
         <Main onAdd={onAdd} categories={categories}></Main>
         <Cart onAdd={onAdd} onRemove={onRemove} cartItems={cartItems}></Cart>
+        {showItem ? <StripeContainer/> : <button onClick={()=>setShowItem(true)}>Purchase</button>}
         
       </div>
     
