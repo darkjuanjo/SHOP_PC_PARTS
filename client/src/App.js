@@ -1,53 +1,85 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { ApolloProvider } from '@apollo/react-hooks';
-import ApolloClient from 'apollo-boost';
+import Header from './components/Header/Header';
+import Main from './components/Main/Main';
+import Cart from './components/Cart/Cart';
+import data from './Data/data';
+import { useState } from 'react';
+import About from './components/About/index';
+import LoginForm from './components/Login';
+import Nav from './components/Nav';
+import { BrowserRouter, BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+// import StripeContainer from './components/StripeContainer/StripeContainer';
 
-import Header from './components/Header';
-import Footer from './components/Footer';
-
-import Home from './pages/Home';
-import Login from './pages/Login';
-import NoMatch from './pages/NoMatch';
-import SingleThought from './pages/SingleThought';
-import Profile from './pages/Profile';
-import Signup from './pages/Signup';
-
-const client = new ApolloClient({
-  request: operation => {
-    const token = localStorage.getItem('id_token');
-
-    operation.setContext({
-      headers: {
-        authorization: token ? `Bearer ${token}` : ''
-      }
-    });
-  },
-  uri: '/graphql'
-});
 
 function App() {
-  return (
-    <ApolloProvider client={client}>
-      <Router>
-        <div className="flex-column justify-flex-start min-100-vh">
-          <Header />
-          <div className="container">
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/signup" component={Signup} />
-              <Route exact path="/profile/:username?" component={Profile} />
-              <Route exact path="/thought/:id" component={SingleThought} />
+  // const adminUser = {
+  //   email: "admin@mail.com",
+  //   password: "admin123"
+  // }
 
-              <Route component={NoMatch} />
-            </Switch>
-          </div>
-          <Footer />
-        </div>
-      </Router>
-    </ApolloProvider>
+
+  // const [showItem, setShowItem] = useState(false)
+  const { categories } = data;
+  const [cartItems, setCartItems] = useState([]);
+  const onAdd = (category) => {
+    const exist = cartItems.find(x => x.id === category.id);
+    if (exist) {
+      setCartItems(
+        cartItems.map(x =>
+          x.id === category.id ? { ...exist, qty: exist.qty + 1 } : x
+        )
+      );
+    } else {
+      setCartItems([...cartItems, { ...category, qty: 1 }]);
+    }
+  };
+  const onRemove = (category) => {
+    const exist = cartItems.find((x) => x.id === category.id);
+    if (exist.qty === 1) {
+      setCartItems(cartItems.filter((x) => x.id !== category.id));
+    } else {
+      setCartItems(
+        cartItems.map(x =>
+          x.id === category.id ? { ...exist, qty: exist.qty - 1 } : x
+        )
+      );
+
+    }
+  }
+  return (
+    <Router>
+      <div className="App">
+        {/* <About></About> */}
+        <Switch>
+          <Route exact path="/LoginForm" render={() =>
+            <>
+              <div>
+                <Nav></Nav>
+                <main>
+                  <LoginForm></LoginForm>
+                </main>
+              </div>
+            </>
+          }
+          />
+          <Route exact path="/" render={() =>
+            <>
+              <div className="App">
+                <Header countCartItems={cartItems.length}></Header>
+                <About></About>
+                <div className="row">
+                  <Main onAdd={onAdd} categories={categories}></Main>
+                  <Cart onAdd={onAdd} onRemove={onRemove} cartItems={cartItems}></Cart>
+                </div>
+              </div>
+            </>
+          }
+          />
+        </Switch>
+        {/* <Main onAdd={onAdd} categories={categories}></Main> */}
+        {/* <Cart onAdd={onAdd} onRemove={onRemove} cartItems={cartItems}></Cart> */}
+        {/* {showItem ? <StripeContainer /> : <button onClick={() => setShowItem(true)}>Purchase</button>} */}
+      </div>
+    </Router>
   );
 }
-
 export default App;
