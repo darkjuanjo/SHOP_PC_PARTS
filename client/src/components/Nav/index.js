@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Modal from '../Modal';
-import { Link } from 'react-router-dom';
 
 function Nav() {
 
@@ -11,12 +10,36 @@ function Nav() {
     }
 
     return (
-        <header className="flex-row px-1">
+
+    //     <header className="row block center">
+    //     <div>
+    //         <Link to="/">
+    //             <a href="#/">
+    //                 <h1>Shop PC Parts</h1>
+    //             </a>
+    //         </Link>
+    //     </div>
+    //     <div>
+    //         <a href="#/cart">
+
+    //             Cart {' '}
+    //             {countCartItems ? (
+    //                 <button className="badge">{countCartItems}</button>
+    //             ) : (
+    //                 ''
+    //             )}
+
+    //         </a> {' '}
+    //         <Link to="/LoginForm">Sign In</Link>
+    //     </div>
+    // </header>
+
+        <header className="row block center">
             {isModalOpen && <Modal onClose={toggleModal} />}
             <h2>
-                <Link to="/">
+                <a data-testid="link" href="/">
                     <span>Shop PC Parts</span>
-                </Link>
+                </a>
             </h2>
             <nav>
                 {/* Nav options can go in here */}

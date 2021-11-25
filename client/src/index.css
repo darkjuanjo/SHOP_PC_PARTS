@@ -21,6 +21,16 @@ a {
   text-decoration: none;
 }
 
+.cart-img {
+  margin-bottom: 15px;
+  height: 100px;
+  width: 100px;
+}
+
+.flex-row {
+  display: flex;
+  flex-wrap: wrap;
+}
 
 .row {
   display:flex;
@@ -41,7 +51,7 @@ a {
 }
 
 .block {
-  background-color: #e0e0e0;
+  background-color: #718a99;
   padding: 1 rem;
   margin: 0.5 rem;
   border-radius: 0.5 rem;
