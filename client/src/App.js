@@ -7,8 +7,6 @@ import { useState } from 'react';
 import About from './components/About/index';
 import LoginForm from './components/Login';
 import Nav from './components/Nav';
-// import ApolloClient from 'apollo-boost';
-// import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import StripeContainer from './components/StripeContainer/StripeContainer';

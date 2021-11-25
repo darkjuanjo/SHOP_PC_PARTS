@@ -44,3 +44,18 @@ query getOrder($input:String!) {
   }
 }
 `;
+
+export const QUERY_ME_BASIC = gql`
+  {
+    me {
+      users {
+        _id
+        username
+        email
+        orders{
+          _id
+        }
+      }
+    }
+  }
+`;
