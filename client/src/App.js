@@ -1,4 +1,5 @@
 import React from 'react';
+import { useQuery } from '@apollo/react-hooks';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import Cart from './components/Cart/Cart';
@@ -7,20 +8,10 @@ import { useState } from 'react';
 import About from './components/About/index';
 import LoginForm from './components/Login';
 import Nav from './components/Nav';
-// import ApolloClient from 'apollo-boost';
-// import { ApolloProvider } from '@apollo/react-hooks';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import StripeContainer from './components/StripeContainer/StripeContainer';
 
-const httpLink = createHttpLink({
-  uri: '/graphql',
-});
-
-const client = new ApolloClient({
-  link: httpLink,
-  cache: new InMemoryCache(),
-});
 
 function App() {
   // const adminUser = {
@@ -32,6 +23,16 @@ function App() {
   // const [showItem, setShowItem] = useState(false)
   const { categories } = data;
   const [cartItems, setCartItems] = useState([]);
+
+  const httpLink = createHttpLink({
+    uri: '/graphql',
+  });
+
+  const client = new ApolloClient({
+    link: httpLink,
+    cache: new InMemoryCache(),
+  });
+
   const onAdd = (category) => {
     const exist = cartItems.find(x => x.id === category.id);
     if (exist) {
@@ -40,10 +41,12 @@ function App() {
           x.id === category.id ? { ...exist, qty: exist.qty + 1 } : x
         )
       );
-    } else {
+    }
+    else {
       setCartItems([...cartItems, { ...category, qty: 1 }]);
     }
   };
+
   const onRemove = (category) => {
     const exist = cartItems.find((x) => x.id === category.id);
     if (exist.qty === 1) {
@@ -57,40 +60,51 @@ function App() {
 
     }
   }
+
   return (
-  <ApolloProvider client={client}>
-    <Router>
-      <div className="App">
-        <Switch>
-          <Route exact path="/LoginForm" render={() =>
-            <>
-              <div>
-                <Nav></Nav>
-                <main>
-                  <LoginForm></LoginForm>
-                </main>
-              </div>
-            </>
-          }
-          />
-          <Route exact path="/" render={() =>
-            <>
-              <div className="App">
-                <Header countCartItems={cartItems.length}></Header>
-                <About></About>
-                <div className="row">
-                  <Main onAdd={onAdd} categories={categories}></Main>
-                  <Cart onAdd={onAdd} onRemove={onRemove} cartItems={cartItems}></Cart>
+    <ApolloProvider client={client}>
+      <Router>
+        <div className="App">
+          <Switch>
+            <Route exact path="/LoginForm" render={() =>
+              <>
+                <div>
+                  <Nav></Nav>
+                  <main>
+                    <LoginForm></LoginForm>
+                  </main>
                 </div>
-              </div>
-            </>
-          }
-          />
-        </Switch>
-        {/* {showItem ? <StripeContainer /> : <button onClick={() => setShowItem(true)}>Purchase</button>} */}
-      </div>
-    </Router>
-  </ApolloProvider>
+              </>
+            }
+            />
+            <Route exact path="/" render={() =>
+              <>
+                <div className="App">
+                  <Header countCartItems={cartItems.length} ></Header>
+                  <About></About>
+                  <div className="row">
+                    <Main onAdd={onAdd} categories={categories}></Main>
+                  </div>
+                </div>
+              </>
+            }
+            />
+            <Route exact path="/Cart" render={() =>
+              <>
+                <div className="App">
+                  <Header countCartItems={cartItems.length}></Header>
+                  <main>
+                    <Cart onAdd={onAdd} onRemove={onRemove} cartItems={cartItems}></Cart>
+                  </main>
+                </div>
+              </>
+            }
+            />
+          </Switch>
+          {/* {showItem ? <StripeContainer /> : <button onClick={() => setShowItem(true)}>Purchase</button>} */}
+        </div>
+      </Router>
+    </ApolloProvider>
   );
 }
 export default App;

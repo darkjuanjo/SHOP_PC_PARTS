@@ -2,28 +2,40 @@ import React from "react";
 import { Link } from 'react-router-dom';
 
 function Header(props) {
-    const { countCartItems } = props;
+    const { countCartItems} = props;
+    // const location = useLocation();
     return (
         <header className="row block center">
             <div>
                 <Link to="/">
-                    <h1>Shop PC Parts</h1>
+                    <a href="#/">
+                        <h1>Shop PC Parts</h1>
+                    </a>
                 </Link>
             </div>
             <div>
-                <Link to="#/cart">
+                <Link to="/Cart">
+                    <a href="#/cart">
 
-                    Cart {' '}
-                    {countCartItems ? (
-                        <button className="badge">{countCartItems}</button>
-                    ) : (
-                        ''
-                    )};
+                        Cart {'    '}
+                        {countCartItems ? (
+                            <button className="badge">{countCartItems}</button>
+                        ) : (
+                            ''
+                        )}
 
-                </Link> {' '}
+                    </a>
+                </Link> {'    '}
+                
                 <Link to="/LoginForm">Sign In</Link>
             </div>
         </header>
     );
 };
 export default Header;
+
+// {username ? (
+//     <p>{username}</p>
+// ) : (
+//     <Link to="/LoginForm">Sign In</Link>
+// )}

@@ -37,7 +37,7 @@ const Modal = ({ onClose }) => {
                 <h3 className="modalTitle">Create an account</h3>
                             <form onSubmit={handleFormSubmit}>
               <input
-                className="form-input"
+                className="my-1"
                 placeholder="Your username"
                 name="username"
                 type="username"
@@ -46,7 +46,7 @@ const Modal = ({ onClose }) => {
                 onChange={handleChange}
               />
               <input
-                className="form-input"
+                className="my-1"
                 placeholder="Your email"
                 name="email"
                 type="email"
@@ -55,7 +55,7 @@ const Modal = ({ onClose }) => {
                 onChange={handleChange}
               />
               <input
-                className="form-input"
+                className="my-1"
                 placeholder="******"
                 name="password"
                 type="password"

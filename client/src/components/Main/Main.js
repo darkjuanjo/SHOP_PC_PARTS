@@ -6,7 +6,7 @@ function Main(props) {
     return (
         <main className="block col-2">
             <h2>Products</h2>
-            <div>
+            <div className="flex-row">
                 {categories.map((category) => (
                     <Category key={category.id} category={category} onAdd={onAdd}></Category>
                 ))};
