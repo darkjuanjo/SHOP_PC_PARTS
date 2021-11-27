@@ -51,7 +51,8 @@ a {
 }
 
 .block {
-  background-color: #718a99;
+  /* background-color: #718a99; */
+  background-color: #e0e0e0;
   padding: 1 rem;
   margin: 0.5 rem;
   border-radius: 0.5 rem;

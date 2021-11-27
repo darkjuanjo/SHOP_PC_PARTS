@@ -1,41 +1,38 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import Auth from '../../utils/auth';
 
-function Header(props) {
-    const { countCartItems} = props;
+function Header({countCartItems}) {
+    // const { loading, data } = useQuery(QUERY_ME_BASIC);
     // const location = useLocation();
+    const loggedIn = Auth.loggedIn();
+    const user = Auth.getProfile();
     return (
         <header className="row block center">
             <div>
                 <Link to="/">
-                    <a href="#/">
                         <h1>Shop PC Parts</h1>
-                    </a>
+                </Link>
+            </div>
+            <div>
+                <Link to="/Items">
+                        <h1>Items</h1>
                 </Link>
             </div>
             <div>
                 <Link to="/Cart">
-                    <a href="#/cart">
-
                         Cart {'    '}
                         {countCartItems ? (
                             <button className="badge">{countCartItems}</button>
                         ) : (
                             ''
                         )}
-
-                    </a>
                 </Link> {'    '}
-                
-                <Link to="/LoginForm">Sign In</Link>
+                {loggedIn  ? (
+                <Link to={`/Profile/${user.data.username}`}>Hi {user.data.username}!</Link>
+                ):<Link to="/LoginForm">Sign In</Link> }
             </div>
         </header>
     );
 };
 export default Header;
-
-// {username ? (
-//     <p>{username}</p>
-// ) : (
-//     <Link to="/LoginForm">Sign In</Link>
-// )}

@@ -14,9 +14,9 @@ query Items{
 }
 `;
 
-export const QUERY_USERS = gql`
-query user{
-  users {
+export const QUERY_USER = gql`
+query($username:String!) {
+  user(username:$username) {
     _id
     username
     email
@@ -49,12 +49,7 @@ export const QUERY_ME_BASIC = gql`
   {
     me {
       users {
-        _id
         username
-        email
-        orders{
-          _id
-        }
       }
     }
   }

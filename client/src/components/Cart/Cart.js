@@ -17,7 +17,7 @@ function Cart(props) {
             </div>
             {cartItems.map((item) => (
                 <div key={item.id} className="row">
-                    <img src={item.image} className="cart-img"></img>
+                    <img src={item.image} className="cart-img" alt="some description"></img>
                     <div className="col-2">{item.name}</div>
                     <div className="col-2">
                         <button onClick={() => onAdd(item)} className="add">+</button>
