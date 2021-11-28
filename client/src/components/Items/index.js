@@ -7,7 +7,7 @@ const Items = () => {
     if (loading) {
       return <div>Loading...</div>;
     }
-    console.log(data.items);
+    console.log(data);
     return (
       <div>
         <div className="flex-row mb-3">
@@ -17,7 +17,7 @@ const Items = () => {
             data.items.map(item => (
                 <li key={item._id}>{item.name}</li>
               ))
-            ): (
+            ) : (
                 <li>No Items in inventory yet!</li>
             )}
             </ul>

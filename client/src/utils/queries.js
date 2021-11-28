@@ -1,15 +1,15 @@
 import gql from 'graphql-tag';
 
 export const QUERY_ITEMS = gql`
-query Items{
-  items{
+query getItems($input:String){
+  items(category:$input){
     _id
     name
-    cost
+    price
     category
     description
     stock
-    AddedAt
+    image
   }
 }
 `;
