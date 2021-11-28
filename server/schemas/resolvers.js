@@ -24,6 +24,7 @@ const resolvers = {
       return User.findOne({ username })
         .select('-__v -password')
         .populate('history')
+        // return user;
     },
     items: async (parent, { category }) => {
       const params = category ? { category } : {};
