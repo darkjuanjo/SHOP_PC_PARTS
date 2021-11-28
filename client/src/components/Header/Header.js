@@ -36,7 +36,7 @@ function Header({ countCartItems }) {
             </div>
             <div>
                 {loggedIn ? (
-                    <p className="bg-dark text-secondary p-3 display-inline-block">Welcome Back!</p>
+                    <p></p>
                 ) : (
                     <div className="bg-dark text-secondary p-3 display-inline-block">
                         <span>Not a member?</span>

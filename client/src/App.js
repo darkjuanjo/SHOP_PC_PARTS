@@ -34,7 +34,6 @@ function App() {
   });
 
   // const [showItem, setShowItem] = useState(false)
-  const { products } = data;
   const [cartItems, setCartItems] = useState([]);
   const onAdd = (category) => {
     const cartItem = cartItems.find(item => item._id === category._id);
@@ -83,7 +82,7 @@ function App() {
                 <div className="App">
                   <About></About>
                   <div className="row">
-                    <Main onAdd={onAdd} products={products}></Main>
+                    <Main onAdd={onAdd}></Main>
                   </div>
                 </div>
               </>
@@ -110,7 +109,7 @@ function App() {
             <Route exact path="/Items" render={() =>
               <>
                 <div className="App">
-                  <Items/>
+                  <Items onAdd={onAdd}/>
                 </div>
               </>
             }
