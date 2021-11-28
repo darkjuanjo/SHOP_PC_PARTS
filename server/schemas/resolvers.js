@@ -33,33 +33,42 @@ const resolvers = {
     item: async (parent, { name }) => {
       return Inventory.findOne({ name });
     },
-    getOrder: async (parent, {order}, context) => {
-      if(context.user) {
-       return await Order.findById({ _id:order }) //find the order
-       .then(response => { 
-  return Product.find({ '_id':{$in: response.products}}) //this returns list of products id
-        .then(items => {
-          let _id = [];
-          let qty = [];
-          items.forEach(item => {
-            _id.push(item.product);
-            qty.push(item.qty);
-          });
-    return Inventory.find({'_id':{$in:_id}})
-          .then(items => {
-            const purchase_array = [];
-            items.forEach((item,i) => {
-              const purchase = {
-                item: item,
-                qty:  qty[i]
-              }
-              purchase_array.push(purchase);
-            });
-            return purchase_array;
-          });      
-        });
-       })
+    getOrders: async (parent, {orders}, context) => {
+        //get order objects
+        const order_array = [];
+        const products_array = [];
+        const items_array = [];
+        //get orders
+      for(let i = 0; i < orders.length; i++)
+      {
+        const object = await Order.findOne({'_id':orders[i]});
+        order_array.push(object);
       }
+      for(let i = 0; i < order_array.length; i++)
+      {
+        const temp = [];
+        for(let ii = 0; ii < order_array[i].products.length; ii++)
+        {
+          const item_id = await Product.findOne({'_id':order_array[i].products[ii]});
+          const item = await Inventory.findOne({'_id':item_id.product});
+
+          temp.push({
+            _id: item._id,
+            name: item.name,
+            cost: item.cost,
+            category: item.category,
+            description: item.description,
+            qty_bought: item_id.qty
+          });
+        }
+        const order = {
+          order_id: order_array[i]._id,
+          products: temp,
+          order_cost: order_array[i].OrderCost
+        }
+        products_array.push(order);
+      }
+       return products_array;
     },
   },
 

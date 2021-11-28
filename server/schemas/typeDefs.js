@@ -44,9 +44,19 @@ type Item {
     AddedAt: String
 }
 
+type Purchased_Item {
+  _id: ID
+  name: String
+  cost: String
+  category: String
+  description: String
+  qty_bought: Int
+}
+
 type Purchased {
-  item: Item
-  qty: Int
+  order_id: String
+  products: [Purchased_Item]
+  order_cost: Int
 }
 
 type Auth {
@@ -60,7 +70,7 @@ type Query {
     user(username: String!): User
     items(category: String): [Items]
     item(name: String!): Item
-    getOrder(order: String!): [Purchased]
+    getOrders(orders: [String]!): [Purchased]
 }
 
 type Mutation {

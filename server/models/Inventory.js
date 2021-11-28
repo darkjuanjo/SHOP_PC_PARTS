@@ -25,7 +25,10 @@ const InventorySchema = new Schema(
     stock: {
       type: Number,
       required: true
-    },    
+    },
+    Image:{
+      type:String
+    },  
     AddedAt: {
       type: Date,
       default: Date.now,
