@@ -5,9 +5,10 @@ query getItems($input:String){
   items(category:$input){
     _id
     name
-    cost
+    price
     category
     description
+    image
     stock
     AddedAt
   }
@@ -35,9 +36,10 @@ query getOrders($input:[String]!) {
     products {
       _id
       name
-      cost
+      price
       category
       description
+      image
       qty_bought
     }
     order_cost

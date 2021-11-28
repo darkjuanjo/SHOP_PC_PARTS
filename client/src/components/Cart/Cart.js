@@ -16,7 +16,7 @@ function Cart(props) {
                 {cartItems.length === 0 && <div> Cart is Empty</div>}
             </div>
             {cartItems.map((item) => (
-                <div key={item.id} className="row">
+                <div key={item._id} className="row">
                     <img src={item.image} className="cart-img" alt="some description"></img>
                     <div className="col-2">{item.name}</div>
                     <div className="col-2">

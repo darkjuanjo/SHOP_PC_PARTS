@@ -58,6 +58,7 @@ const resolvers = {
             cost: item.cost,
             category: item.category,
             description: item.description,
+            image: item.image,
             qty_bought: item_id.qty
           });
         }

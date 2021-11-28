@@ -38,11 +38,11 @@ function App() {
   const { categories } = data;
   const [cartItems, setCartItems] = useState([]);
   const onAdd = (category) => {
-    const exist = cartItems.find(x => x.id === category.id);
-    if (exist) {
+    const cartItem = cartItems.find(item => item._id === category._id);
+    if (cartItem) {
       setCartItems(
-        cartItems.map(x =>
-          x.id === category.id ? { ...exist, qty: exist.qty + 1 } : x
+        cartItems.map(item =>
+          item._id === category._id ? { ...cartItem, qty: cartItem.qty + 1 } : item
         )
       );
     }
@@ -52,18 +52,27 @@ function App() {
   };
 
   const onRemove = (category) => {
-    const exist = cartItems.find((x) => x.id === category.id);
-    if (exist.qty === 1) {
-      setCartItems(cartItems.filter((x) => x.id !== category.id));
+    const cartItem = cartItems.find((item) => item._id === category._id);
+    if (cartItem.qty === 1) {
+      setCartItems(cartItems.filter((item) => item._id !== category._id));
     } else {
       setCartItems(
-        cartItems.map(x =>
-          x.id === category.id ? { ...exist, qty: exist.qty - 1 } : x
+        cartItems.map(item =>
+          item._id === category._id ? { ...cartItem, qty: cartItem.qty - 1 } : item
         )
       );
 
     }
   }
+
+  function totalItems(cart) {
+    var total = 0;
+    cartItems.forEach(item => {
+      total += item.qty;
+    });
+    return total;
+  }
+
   return (
     <ApolloProvider client={client}>
       <Router>
@@ -84,7 +93,7 @@ function App() {
               <>
                 <div className="App">
                   <Header 
-                  countCartItems={cartItems.length}>
+                  countCartItems={totalItems(cartItems)}>
                   </Header>
                   <About></About>
                   <div className="row">
@@ -97,7 +106,7 @@ function App() {
             <Route exact path="/Cart" render={() =>
               <>
                 <div className="App">
-                  <Header countCartItems={cartItems.length}></Header>
+                  <Header countCartItems={totalItems(cartItems)}></Header>
                   <main>
                     <Cart onAdd={onAdd} onRemove={onRemove} cartItems={cartItems}></Cart>
                   </main>
@@ -108,7 +117,7 @@ function App() {
             <Route exact path="/Profile/:username?" render={() =>
               <>
                 <div className="App">
-                  <Header countCartItems={cartItems.length}></Header>
+                  <Header countCartItems={totalItems(cartItems)}></Header>
                   <Profile></Profile>
                 </div>
               </>
@@ -117,8 +126,8 @@ function App() {
             <Route exact path="/Items" render={() =>
               <>
                 <div className="App">
-                  <Header countCartItems={cartItems.length}></Header>
-                  <Items/>
+                  <Header countCartItems={totalItems(cartItems)}></Header>
+                  <Items onAdd={onAdd}></Items>
                 </div>
               </>
             }
