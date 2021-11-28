@@ -1,8 +1,8 @@
 import gql from 'graphql-tag';
 
 export const QUERY_ITEMS = gql`
-query Items{
-  items{
+query getItems($input:String){
+  items(category:$input){
     _id
     name
     cost
@@ -28,19 +28,19 @@ query($username:String!) {
 `;
 
 export const QUERY_ORDER = gql`
-query getOrder($input:String!) {
-  getOrder(order:$input)
+query getOrders($input:[String]!) {
+  getOrders(orders:$input)
   {
-    item{
+    order_id
+    products {
       _id
       name
       cost
       category
       description
-      stock
-      AddedAt  
+      qty_bought
     }
-    qty
+    order_cost
   }
 }
 `;
