@@ -59,7 +59,7 @@ const resolvers = {
         });
        })
       }
-    }
+    },
   },
 
   Mutation: {
