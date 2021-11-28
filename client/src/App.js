@@ -65,7 +65,7 @@ function App() {
     }
   }
 
-  function totalItems(cart) {
+  function totalItems() {
     var total = 0;
     cartItems.forEach(item => {
       total += item.qty;
