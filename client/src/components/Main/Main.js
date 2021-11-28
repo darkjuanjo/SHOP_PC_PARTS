@@ -13,8 +13,6 @@ function Main(props) {
 
     return (
         <main className="block col-2">
-            {/* <h2>Search by Category</h2>
-            <CategoryOptions setCurrentCategory={setCurrentCategory}></CategoryOptions> */}
             <h2>Products</h2>
             <div className="flex-row">
                 {data.items.map((category) => (

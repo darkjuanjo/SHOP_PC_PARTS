@@ -12,27 +12,35 @@ function Items(props) {
   if (loading) {
     return <div>Loading...</div>;
   }
+  
+  const products = data.items;
 
-  // const currentProducts = products.filter((selection) => selection.category === currentCategory);
+  const currentProducts = products.filter((selection) => selection.category === currentCategory);
 
   return (
     <div>
 
       <h2>Item Inventory</h2>
       <div className="flex-row mb-3">
+        <h2>Search by Category</h2>
+        <CategoryOptions setCurrentCategory={setCurrentCategory}></CategoryOptions>
+      </div>
+
+      <div className="flex-row mb-3">
         <h2 className="bg-dark text-secondary p-3 display-inline-block">
-          <ul>
-            {data.items.length > 0 ? (
-              data.items.map(category => (
-                <Category key={category._id} category={category} onAdd={onAdd}></Category>
-              ))
-            ) : (
-              <li>No Items in inventory yet!</li>
-            )}
-          </ul>
+          {currentCategory ? (
+            currentProducts.map((category) => (
+              <Category key={category._id} category={category} onAdd={onAdd}></Category>
+            ))
+          ) : (
+            products.map((category) => (
+              <Category key={category._id} category={category} onAdd={onAdd}></Category>
+            ))
+          )}
+
         </h2>
       </div>
-    </div>
+    </div >
   );
 };
 
