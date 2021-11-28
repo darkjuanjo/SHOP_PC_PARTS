@@ -17,11 +17,10 @@ type Users {
   orders: [String]
 }
 
-type User {
-    _id: ID
+input User {
     username: String
     email: String
-    orders: [Product]
+    password: String
 }
 
 type Items {
@@ -63,13 +62,13 @@ type Purchased {
 
 type Auth {
     token: ID!
-    user: User
+    user: Users
 }
 
 type Query {
-    me: User
-    users: [User]
-    user(username: String!): User
+    me: Users
+    users: [Users]
+    user(username: String!): Users
     items(category: String): [Items]
     item(name: String!): Item
     getOrders(orders: [String]!): [Purchased]
@@ -79,7 +78,9 @@ type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     add_to_Inventory(name: String!, cost: String!, category: String!, description: String!, stock: Int!): Item
-    addOrder(product: [Order]!, cost: Int!): User
+    addOrder(product: [Order]!, cost: Int!): Users
+    editUser(input: User!, username: String): Users
+    deleteUser(username: String!): String
   }
 `;
 

@@ -114,6 +114,25 @@ const resolvers = {
         );
       }
     },
+    editUser: async (parent, {input, username}, context) => {
+      if(context.user) {
+       const user = username===undefined || username === "" ? context.user.username : username;
+       return await User.findOneAndUpdate({username: user}, input, {new: true});
+      }
+    },
+    deleteUser: async (parent, {username}, context) => {
+      if(context.user) {
+      const removed_user = await User.deleteOne({username:username});
+      console.log(removed_user);
+      if(removed_user.deletedCount)
+        {
+          return `User: ${username} deleted successfully!`
+        }
+        else
+        return `Error Unable to delete ${username}`
+        
+      }
+    }
   }
 };
 
