@@ -26,10 +26,10 @@ type User {
 
 type Items {
     _id: ID
+    description: String
     name: String
     price: Float
     category: String
-    description: String
     stock: Int
     image: String
     AddedAt: String

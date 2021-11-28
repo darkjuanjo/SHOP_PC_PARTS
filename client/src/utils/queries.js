@@ -10,7 +10,7 @@ query getItems($input:String){
     description
     image
     stock
-    AddedAt
+    image
   }
 }
 `;

@@ -5,8 +5,6 @@ import Cart from './components/Cart/Cart';
 import data from './Data/data';
 import { useState } from 'react';
 import About from './components/About/index';
-import LoginForm from './components/Login';
-import Nav from './components/Nav';
 import Profile from './components/Profile';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -16,6 +14,7 @@ import Items from './components/Items';
 
 
 function App() {
+
   const httpLink = createHttpLink({
     uri: '/graphql',
   });
@@ -35,7 +34,7 @@ function App() {
   });
 
   // const [showItem, setShowItem] = useState(false)
-  const { categories } = data;
+  const { products } = data;
   const [cartItems, setCartItems] = useState([]);
   const onAdd = (category) => {
     const cartItem = cartItems.find(item => item._id === category._id);
@@ -76,28 +75,15 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
+      <Header countCartItems={totalItems(cartItems)}></Header>
         <div className="App">
           <Switch>
-            <Route exact path="/LoginForm" render={() =>
-              <>
-                <div>
-                  <Nav></Nav>
-                  <main>
-                    <LoginForm></LoginForm>
-                  </main>
-                </div>
-              </>
-            }
-            />
             <Route exact path="/" render={() =>
               <>
                 <div className="App">
-                  <Header 
-                  countCartItems={totalItems(cartItems)}>
-                  </Header>
                   <About></About>
                   <div className="row">
-                    <Main onAdd={onAdd} categories={categories}></Main>
+                    <Main onAdd={onAdd} products={products}></Main>
                   </div>
                 </div>
               </>
@@ -106,7 +92,6 @@ function App() {
             <Route exact path="/Cart" render={() =>
               <>
                 <div className="App">
-                  <Header countCartItems={totalItems(cartItems)}></Header>
                   <main>
                     <Cart onAdd={onAdd} onRemove={onRemove} cartItems={cartItems}></Cart>
                   </main>
@@ -117,7 +102,6 @@ function App() {
             <Route exact path="/Profile/:username?" render={() =>
               <>
                 <div className="App">
-                  <Header countCartItems={totalItems(cartItems)}></Header>
                   <Profile></Profile>
                 </div>
               </>
@@ -126,8 +110,7 @@ function App() {
             <Route exact path="/Items" render={() =>
               <>
                 <div className="App">
-                  <Header countCartItems={totalItems(cartItems)}></Header>
-                  <Items onAdd={onAdd}></Items>
+                  <Items/>
                 </div>
               </>
             }

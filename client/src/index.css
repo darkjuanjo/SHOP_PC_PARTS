@@ -21,6 +21,14 @@ a {
   text-decoration: none;
 }
 
+.categoryForm {
+  width: 100%;
+}
+
+.radioLabel {
+ margin-right: 15px;
+}
+
 .cart-img {
   margin-bottom: 15px;
   height: 100px;

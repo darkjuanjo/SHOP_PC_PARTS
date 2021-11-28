@@ -1,10 +1,11 @@
 const data = {
-    categories: [
+    products: [
         {
             id: '1',
             description: 'Motherboard',
             name: 'MSI Z490 PRO',  
             price: 249.80,
+            category: 'Motherboards',
             image:'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6436/6436464_sd.jpg',
         },
         {
@@ -12,6 +13,7 @@ const data = {
             description: 'CPU',
             name: 'Intel-i9 9900k',
             price: 499,
+            category: 'CPUs',
             image:'https://www.bhphotovideo.com/images/images1500x1500/intel_bx80684i99900kf_boxed_intel_core_i9_9900kf_1455409.jpg',
         },
         {
@@ -19,6 +21,7 @@ const data = {
             description: 'RAM',
             name: 'Corsair(8x2 GB) Vengeance',
             price: 98.99,
+            category: 'RAM',
             image:'https://static.techspot.com/images2/downloads/topdownload/2014/12/ram.png',
         },
         {
@@ -26,6 +29,7 @@ const data = {
             description: 'Cooling System',
             name: 'NZXT X63 Kraken',
             price: 189.99,
+            category: 'Cooling',
             image:'https://images.mmorpg.com/images/heroes/posts/120076.jpg',
         },
         {
@@ -33,6 +37,7 @@ const data = {
             description:'GPU',
             name: 'GEFORCE RTX 3080',
             price: 829.81,
+            category: 'VideoCards',
             image: 'https://m.media-amazon.com/images/I/81pvDYeb+qL._AC_SY450_.jpg',
         },
         {
@@ -40,6 +45,7 @@ const data = {
             description: 'Power Supply',
             name: 'Seasonic Focus 850W',
             price: 141.19,
+            category: 'PowerSupplies',
             image: 'https://m.media-amazon.com/images/I/718Xf34YhtL._AC_SX450_.jpg',
         },
         {
@@ -47,6 +53,7 @@ const data = {
             description: 'SSD',
             name: 'Samsung EVOPlus M.2(1TB)', 
             price: 139.99,
+            category: 'HardDrives',
             image: 'https://www.pcgamesn.com/wp-content/uploads/2019/01/Samsung-970-EVO-Plus-review-HD.jpg',
         },
         {
@@ -54,6 +61,7 @@ const data = {
             description: 'Case',
             name: 'NZXT H700 mid-tower',
             price: 152.75,
+            category: 'Cases',
             image: 'https://cdn.mos.cms.futurecdn.net/ddDsbbETpQj5sBhWw2zoB.jpg',
         },
         {
@@ -61,6 +69,7 @@ const data = {
             description: 'Fans',
             name: 'Corsair LL120 White RGB 120mm',
             price: 24.80,
+            category: 'Fans',
             image: 'https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6351/6351843cv11d.jpg',
         },
         {
@@ -68,6 +77,7 @@ const data = {
             description: 'HDD',
             name: 'Seagate Desktop HDD(1TB)',
             price: 29.99,
+            category: 'HardDrives',
             image: 'https://c1.neweggimages.com/ProductImage/22-148-840-08.jpg',
         },
         {
@@ -75,6 +85,7 @@ const data = {
             description: 'Cables',
             name: 'CableMod PRO',
             price: 98.03,
+            category: 'Cables',
             image: 'https://cdn.cablemod.com/wp-content/uploads/2018/02/CM-PCAB-BKIT-NKW-3PW-R-1-1000x1000.jpg',
         },
         {
@@ -82,11 +93,9 @@ const data = {
             description: 'WIFI Card',
             name: 'Elgato HD60 Pro',
             price: 179.99,
+            category: 'WIFI',
             image: 'https://m.media-amazon.com/images/I/61NcypBj+wL._AC_SY450_.jpg',
         },
-
-
-        
-    ],
+    ]
 };
 export default data;
