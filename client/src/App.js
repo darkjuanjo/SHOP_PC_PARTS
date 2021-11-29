@@ -10,6 +10,7 @@ import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@ap
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { setContext } from '@apollo/client/link/context';
 import Items from './components/Items';
+import AddInventory from './components/AddInventory';
 // import StripeContainer from './components/StripeContainer/StripeContainer';
 
 
@@ -74,7 +75,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-      <Header countCartItems={totalItems(cartItems)}></Header>
+        <Header countCartItems={totalItems(cartItems)}></Header>
         <div className="App">
           <Switch>
             <Route exact path="/" render={() =>
@@ -109,7 +110,15 @@ function App() {
             <Route exact path="/Items" render={() =>
               <>
                 <div className="App">
-                  <Items onAdd={onAdd}/>
+                  <Items onAdd={onAdd} />
+                </div>
+              </>
+            }
+            />
+            <Route exact path="/AddInventory" render={() =>
+              <>
+                <div className="App">
+                  <AddInventory />
                 </div>
               </>
             }

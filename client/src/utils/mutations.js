@@ -25,9 +25,8 @@ export const ADD_USER = gql`
 `;
 
 export const ADD_INVENTORY = gql`
-mutation add_to_Inventory($name:String!, $price:String!, $category:String!, $description: String!, $stock: Int!, $image:String){
+mutation add_to_Inventory($name:String!, $price:Int!, $category:String!, $description: String!, $stock: Int!, $image:String){
   add_to_Inventory(name: $name, price: $price, category: $category, description: $description, stock: $stock, image: $image) {
-    _id
     name
     price
     category
