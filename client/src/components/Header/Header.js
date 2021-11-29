@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, userLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Auth from '../../utils/auth';
 
 function Header({countCartItems}) {
@@ -7,7 +7,7 @@ function Header({countCartItems}) {
     // const location = useLocation();
     const loggedIn = Auth.loggedIn();
     const user = Auth.getProfile();
-    const location = userLocation();
+    const location = useLocation();
     return (
         <header className="row block center">
             <div>

@@ -6,10 +6,11 @@ import Auth from '../../utils/auth';
 
 const Profile = () => {
     const { username: userParam } = useParams();
-  console.log(userParam);
+     console.log(userParam);
     const { loading, data } = useQuery(QUERY_USER, {
       variables: { username: userParam }
     });
+    console.log(data);
     const user = data?.user || {};
     if (loading) {
       return <div>Loading...</div>;
