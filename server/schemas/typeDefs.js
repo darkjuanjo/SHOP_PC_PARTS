@@ -48,7 +48,7 @@ type Item {
 type Purchased_Item {
   _id: ID
   name: String
-  cost: String
+  price: String
   category: String
   description: String
   qty_bought: Int
@@ -57,7 +57,7 @@ type Purchased_Item {
 type Purchased {
   order_id: String
   products: [Purchased_Item]
-  order_cost: Int
+  order_cost: Float
 }
 
 type Auth {
@@ -78,7 +78,7 @@ type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
     add_to_Inventory(name: String!, cost: String!, category: String!, description: String!, stock: Int!): Item
-    addOrder(product: [Order]!, cost: Int!): Users
+    addOrder(product: [Order]!, cost: Float!): Users
     editUser(input: User!, username: String): Users
     deleteUser(username: String!): String
   }

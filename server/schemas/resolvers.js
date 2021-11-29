@@ -55,7 +55,7 @@ const resolvers = {
           temp.push({
             _id: item._id,
             name: item.name,
-            cost: item.cost,
+            price: item.price,
             category: item.category,
             description: item.description,
             image: item.image,
