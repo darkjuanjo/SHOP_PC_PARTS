@@ -10,10 +10,9 @@ function Main(props) {
     if (loading) {
         return <div>Loading...</div>;
     }
-
     var featuredProducts = []
 
-    if(data.items > 0)
+    if(data.items.length > 0)
     {
         for (let index = 0; index < 4; index++) {
             featuredProducts.push(data.items[index]);
@@ -22,7 +21,7 @@ function Main(props) {
     return (
         <main className="block col-2">
             <h2 className="featureTitle">Featured Products</h2>
-            {data.items > 0? (
+            {data.items.length > 0? (
             <div className="flex-row">
             {featuredProducts.map((product) => (
                 <Featured key={product._id} product={product} onAdd={onAdd}></Featured>
