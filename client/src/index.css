@@ -46,6 +46,9 @@ a {
   
 }
 
+.checkout {
+  display: table;
+}
 
 .col-1 {
   
@@ -76,7 +79,15 @@ a {
 img.small {
   max-height:10rem;
   padding: 10px;
- 
+}
+
+img.featured {
+  max-height:30rem;
+  padding: 30px;
+}
+
+.featureTitle {
+  font-family: Helvetica, Arial, sans-serif;
 }
 
 button {
@@ -99,12 +110,24 @@ button.remove {
   background-color: #f04040;
   width:1.5rem;
 }
+
 button.badge {
   background-color: #f04040;
   border:none;
   color:#ffffff;
   width:1.5rem;
 }
+
+.logoutBtn {
+  width: 5%;
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.profilePage {
+  background-color: #2a7ece;
+}
+
 .text-right {
   text-align: right;
 }
