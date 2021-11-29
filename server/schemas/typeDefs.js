@@ -77,7 +77,8 @@ type Query {
 type Mutation {
     login(email: String!, password: String!): Auth
     addUser(username: String!, email: String!, password: String!): Auth
-    add_to_Inventory(name: String!, cost: String!, category: String!, description: String!, stock: Int!): Item
+    add_to_Inventory(name: String!, price: String!, category: String!, description: String!, stock: Int!, image:String): Item
+    delete_from_Inventory(name:String): Item
     addOrder(product: [Order]!, cost: Float!): Users
     editUser(input: User!, username: String): Users
     deleteUser(username: String!): String

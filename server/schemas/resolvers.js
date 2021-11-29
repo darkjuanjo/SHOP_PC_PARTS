@@ -96,9 +96,21 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    add_to_Inventory: async (parent, args) => {
+    add_to_Inventory: async (parent, args, context) => {
+      if(context.user.username === 'admin')
+      {
       const item = await Inventory.create(args);
       return item;
+      }
+      return {}
+    },
+    delete_from_Inventory: async (parent, {name}, context) => {
+      if(context.user.username === 'admin')
+      {
+      const item = await Inventory.deleteOne({name:name});
+      return item;
+      }
+      return {}
     },
     addOrder: async (parent, {product, cost}, context) => {
       if(context.user) {
