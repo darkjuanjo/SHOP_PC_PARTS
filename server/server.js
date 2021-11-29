@@ -4,7 +4,7 @@ const path = require('path');
 const {typeDefs, resolvers} = require('./schemas');
 const {authMiddleware} = require('./utils/auth');
 const db = require('./config/connection');
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 3001;
 require("dotenv").config()
 // const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST)
 const bodyParser = require("body-parser")
