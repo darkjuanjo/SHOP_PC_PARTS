@@ -1,11 +1,23 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_INVENTORY } from '../../utils/mutations';
+import { QUERY_ITEMS } from '../../utils/queries';
 
 function AddInventory() {
     const [formState, setFormState] = useState({ description: '', name: '', price: '', stock:'', category: '', image: '' });
     const { description, name, price, category, image} = formState;
-    const [add_to_Inventory, { error }] = useMutation(ADD_INVENTORY);
+    const [add_to_Inventory, { error }] = useMutation(ADD_INVENTORY , {
+        update(cache, { data: { add_to_Inventory } }) {
+            // read what's currently in the cache
+            const { items } = cache.readQuery({ query: QUERY_ITEMS });
+        
+            // prepend the newest thought to the front of the array
+            cache.writeQuery({
+              query: QUERY_ITEMS,
+              data: { items: [add_to_Inventory, ...items] }
+            });
+          }
+    });
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -14,12 +26,12 @@ function AddInventory() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-       
         const stock = parseInt(formState.stock);
         try {
             const { data } = await add_to_Inventory({
                 variables: { description, name, price, category, stock, image}
             });
+            console.log(data);
         } catch (e) {
             console.error(error);
         }

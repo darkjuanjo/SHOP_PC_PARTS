@@ -82,13 +82,14 @@ p {
   margin-top: 0;
 }
 
-a {
+.link {
   color: var(--tertiary);
   text-decoration: none;
   font-weight: bold;
+  display: inline;
 }
 
-a:hover {
+.link:hover, header h1:hover {
   text-decoration: underline;
 }
 
@@ -96,7 +97,7 @@ header {
   background: var(--dark);
 }
 
-header a {
+header a, .link {
   color: darkblue;
 }
 

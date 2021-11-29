@@ -13,7 +13,6 @@ const Profile = (props) => {
   });
 
   const {cartItems} = props;
-  console.log('cart items are: ' + cartItems);
   const user = data?.user || {};
   if (loading) {
     return <div>Loading...</div>;

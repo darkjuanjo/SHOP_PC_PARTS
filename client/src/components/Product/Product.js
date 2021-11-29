@@ -1,6 +1,5 @@
 import React from "react";
 import Auth from '../../utils/auth';
-import { Link } from 'react-router-dom';
 
 function Product(props) {
     const { product, onAdd } = props;

@@ -14,7 +14,6 @@ function LoginForm({ onClose }) {
     }
     async function handleSubmit(e) {
         e.preventDefault();
-        console.log(formState);
         try {
             const { data } = await login({
                 variables: { email, password }
