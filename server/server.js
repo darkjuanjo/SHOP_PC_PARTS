@@ -4,7 +4,7 @@ const path = require('path');
 const {typeDefs, resolvers} = require('./schemas');
 const {authMiddleware} = require('./utils/auth');
 const db = require('./config/connection');
-const PORT = process.env.PORT || 3001;
+// const PORT = process.env.PORT || 3001;
 require("dotenv").config()
 // const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST)
 const bodyParser = require("body-parser")
@@ -27,32 +27,32 @@ if (process.env.NODE_ENV === 'production') {
 app.use(cors()); //payments stripe
 
 //payment stripe
-// app.post("/payment", cors(), async (req, res) => {
-//   let {amount, id} = req.body
-//   try {
-//       const payment = await stripe.paymentIntents.create({
-//           amount,
-//           currency: "USD",
-//           description:"Shop PC Parts",
-//           payment_method: id,
-//           confirm: true
-//       })
-//       console.log("Payment", payment)
-//       res.json({
-//           message:"Payment successful",
-//           success: true
-//       })
+app.post("/payment", cors(), async (req, res) => {
+  let {amount, id} = req.body
+  try {
+      const payment = await stripe.paymentIntents.create({
+          amount,
+          currency: "USD",
+          description:"Shop PC Parts",
+          payment_method: id,
+          confirm: true
+      })
+      console.log("Payment", payment)
+      res.json({
+          message:"Payment successful",
+          success: true
+      })
 
 
 
-//   } catch (error) {
-//       console.log("Error", error)
-//       res.json({
-//           message:"Payment failed",
-//           success: false
-//       })
-//   }
-// }) 
+  } catch (error) {
+      console.log("Error", error)
+      res.json({
+          message:"Payment failed",
+          success: false
+      })
+  }
+}) 
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
@@ -60,8 +60,8 @@ app.get('*', (req, res) => {
 });
 
 db.once('open', () => {
-  app.listen(PORT, () => {
-    console.log(`API server running on port ${PORT}!`);
+  app.listen(process.env.PORT || 3001, () => {
+    // console.log(`API server running on port ${PORT}!`);
     console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
   });
 });
