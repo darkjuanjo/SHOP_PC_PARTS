@@ -21,9 +21,7 @@ query($username:String!) {
     _id
     username
     email
-    orders{
-      _id
-    }
+    orders
   }
 }
 `;
