@@ -55,7 +55,7 @@ const resolvers = {
           temp.push({
             _id: item._id,
             name: item.name,
-            cost: item.cost,
+            price: item.price,
             category: item.category,
             description: item.description,
             image: item.image,
@@ -97,9 +97,21 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    add_to_Inventory: async (parent, args) => {
+    add_to_Inventory: async (parent, args, context) => {
+      if(context.user.username === 'admin')
+      {
       const item = await Inventory.create(args);
       return item;
+      }
+      return {}
+    },
+    delete_from_Inventory: async (parent, {name}, context) => {
+      if(context.user.username === 'admin')
+      {
+      const item = await Inventory.deleteOne({name:name});
+      return item;
+      }
+      return {}
     },
     addOrder: async (parent, {product, cost}, context) => {
       if(context.user) {
@@ -115,6 +127,25 @@ const resolvers = {
         );
       }
     },
+    editUser: async (parent, {input, username}, context) => {
+      if(context.user) {
+       const user = username===undefined || username === "" ? context.user.username : username;
+       return await User.findOneAndUpdate({username: user}, input, {new: true});
+      }
+    },
+    deleteUser: async (parent, {username}, context) => {
+      if(context.user) {
+      const removed_user = await User.deleteOne({username:username});
+      console.log(removed_user);
+      if(removed_user.deletedCount)
+        {
+          return `User: ${username} deleted successfully!`
+        }
+        else
+        return `Error Unable to delete ${username}`
+        
+      }
+    }
   }
 };
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, userLocation } from 'react-router-dom';
 import Auth from '../../utils/auth';
 import LoginForm from "../Login";
 import SignUp from "../SignUp";
@@ -19,6 +19,7 @@ function Header({ countCartItems }) {
     // const location = useLocation();
     const loggedIn = Auth.loggedIn();
     const user = Auth.getProfile();
+    const location = userLocation();
 
     return (
         <header className="row block center">
@@ -34,6 +35,13 @@ function Header({ countCartItems }) {
                     <h1>Items</h1>
                 </Link>
             </div>
+            {location.pathname === '/Items'&& user.username === 'admin' && (
+            <div>
+            <Link to="/AddInventory">
+                    <h1>Add Inventory</h1>
+            </Link>
+        </div>
+            ) }
             <div>
                 {loggedIn ? (
                     <p></p>
