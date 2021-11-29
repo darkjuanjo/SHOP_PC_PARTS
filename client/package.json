@@ -2,7 +2,7 @@
   "name": "SHOP_PC_PARTS",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001/",
+  "proxy": "http://localhost:5001/",
   "dependencies": {
     "@apollo/client": "^3.5.5",
     "@apollo/react-hooks": "^3.1.5",

@@ -4,7 +4,7 @@ const path = require('path');
 const {typeDefs, resolvers} = require('./schemas');
 const {authMiddleware} = require('./utils/auth');
 const db = require('./config/connection');
-// const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 5001;
 require("dotenv").config()
 // const stripe = require("stripe")(process.env.STRIPE_SECRET_TEST)
 const bodyParser = require("body-parser")
@@ -60,8 +60,8 @@ app.get('*', (req, res) => {
 });
 
 db.once('open', () => {
-  app.listen(process.env.PORT || 3001, () => {
-    // console.log(`API server running on port ${PORT}!`);
+  app.listen(PORT, () => {
+    console.log(`API server running on port ${PORT}!`);
     console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
   });
 });
