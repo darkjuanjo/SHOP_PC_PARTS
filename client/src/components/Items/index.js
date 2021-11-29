@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery } from '@apollo/client';
 import { QUERY_ITEMS } from '../../utils/queries';
-import Category from '../Category/Category.js';
+import Product from '../Product/Product.js';
 import CategoryOptions from "../SetCategory/index.js";
 
 function Items(props) {
@@ -20,21 +20,21 @@ function Items(props) {
   return (
     <div>
 
-      <h2>Item Inventory</h2>
-      <div className="flex-row mb-3">
+      <div>
         <h2>Search by Category</h2>
-        <CategoryOptions setCurrentCategory={setCurrentCategory}></CategoryOptions>
+        <CategoryOptions setCurrentCategory={setCurrentCategory}></CategoryOptions><br/>
       </div>
 
+      <h2>Item Inventory</h2>
       <div className="flex-row mb-3">
         <h2 className="bg-dark text-secondary p-3 display-inline-block">
           {currentCategory ? (
-            currentProducts.map((category) => (
-              <Category key={category._id} category={category} onAdd={onAdd}></Category>
+            currentProducts.map((product) => (
+              <Product key={product._id} product={product} onAdd={onAdd}></Product>
             ))
           ) : (
-            products.map((category) => (
-              <Category key={category._id} category={category} onAdd={onAdd}></Category>
+            products.map((product) => (
+              <Product key={product._id} product={product} onAdd={onAdd}></Product>
             ))
           )}
 
