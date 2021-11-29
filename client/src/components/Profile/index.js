@@ -16,12 +16,14 @@ const Profile = () => {
   function logout() {
     Auth.logout();
   }
+
+  console.log(data)
   return (
     <div>
       <div className="flex-row mb-3">
         <h2 className="bg-dark text-secondary p-3 display-inline-block">
           <ul>
-            <li>User: {user.username}'s profile.</li>
+            <li>User: {data.user.username}'s profile.</li>
             <li>Email: {data.user.email}</li>
             {data.user.orders.map(order => (
               <li>{order._id}</li>

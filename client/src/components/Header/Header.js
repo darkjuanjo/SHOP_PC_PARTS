@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { Link, userLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import Auth from '../../utils/auth';
 import LoginForm from "../Login";
 import SignUp from "../SignUp";
-
 function Header({ countCartItems }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isModal2Open, setIsModal2Open] = useState(false);
@@ -19,7 +18,7 @@ function Header({ countCartItems }) {
     // const location = useLocation();
     const loggedIn = Auth.loggedIn();
     const user = Auth.getProfile();
-    const location = userLocation();
+    const location = useLocation();
 
     return (
         <header className="row block center">
@@ -35,7 +34,7 @@ function Header({ countCartItems }) {
                     <h1>Items</h1>
                 </Link>
             </div>
-            {location.pathname === '/Items'&& user.username === 'admin' && (
+            {location.pathname === '/Items'&& user.data.username === 'admin' && (
             <div>
             <Link to="/AddInventory">
                     <h1>Add Inventory</h1>
