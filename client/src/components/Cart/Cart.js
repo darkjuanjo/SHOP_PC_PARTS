@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import StripeContainer from "../StripeContainer/StripeContainer";
+// import StripeContainer from "../StripeContainer/StripeContainer";
 
 
 function Cart(props) {

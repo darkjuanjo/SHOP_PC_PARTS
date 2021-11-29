@@ -33,16 +33,8 @@ function App() {
     cache: new InMemoryCache(),
   });
 
-  // const [showItem, setShowItem] = useState(false)
   const [cartItems, setCartItems] = useState([]);
-  const loadedItems = localStorage.getItem('cartItems');
-  const saveditems = JSON.parse(loadedItems);
-  console.log(saveditems);
-
-  // if (saveditems) {
-  //   setCartItems([saveditems]);
-  // }
-
+  
   const onAdd = (product) => {
     const cartItem = cartItems.find(item => item._id === product._id);
     if (cartItem) {

@@ -15,10 +15,9 @@ function Header({ countCartItems }) {
     const toggleModal2 = () => {
         setIsModal2Open(!isModal2Open);
     }
-    // const { loading, data } = useQuery(QUERY_ME_BASIC);
-    // const location = useLocation();
     const loggedIn = Auth.loggedIn();
     const user = Auth.getProfile();
+    const username = loggedIn? user.data.username : 'guest';
     const location = useLocation();
     return (
         <header className="row block center">
@@ -34,7 +33,7 @@ function Header({ countCartItems }) {
                     <h1>Items</h1>
                 </Link>
             </div>
-            {location.pathname === '/Items'&& user.data.username === 'admin' && (
+            {location.pathname === '/Items'&& username === 'admin' && (
             <div>
             <Link to="/AddInventory">
                     <h1>Add Inventory</h1>
@@ -47,9 +46,9 @@ function Header({ countCartItems }) {
                 ) : (
                     <div className="bg-dark text-secondary p-3 display-inline-block">
                         <span>Not a member?</span>
-                        <a onClick={() => toggleModal2()}>
+                        <p className="link" onClick={() => toggleModal2()}>
                             Sign up!
-                        </a>
+                        </p>
                     </div>
                 )}
 
@@ -65,7 +64,7 @@ function Header({ countCartItems }) {
                 </Link> {'    '}
                 {loggedIn ? (
                     <Link to={`/Profile/${user.data.username}`}>Hi {user.data.username}!</Link>
-                ) : <a onClick={() => toggleModal()}>Sign In</a>}
+                ) : <p className="link" onClick={() => toggleModal()}>Sign In</p>}
             </div>
         </header>
     );
