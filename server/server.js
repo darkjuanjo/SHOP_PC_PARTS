@@ -27,32 +27,32 @@ if (process.env.NODE_ENV === 'production') {
 app.use(cors()); //payments stripe
 
 //payment stripe
-app.post("/payment", cors(), async (req, res) => {
-  let {amount, id} = req.body
-  try {
-      const payment = await stripe.paymentIntents.create({
-          amount,
-          currency: "USD",
-          description:"Shop PC Parts",
-          payment_method: id,
-          confirm: true
-      })
-      console.log("Payment", payment)
-      res.json({
-          message:"Payment successful",
-          success: true
-      })
+// app.post("/payment", cors(), async (req, res) => {
+//   let {amount, id} = req.body
+//   try {
+//       const payment = await stripe.paymentIntents.create({
+//           amount,
+//           currency: "USD",
+//           description:"Shop PC Parts",
+//           payment_method: id,
+//           confirm: true
+//       })
+//       console.log("Payment", payment)
+//       res.json({
+//           message:"Payment successful",
+//           success: true
+//       })
 
 
 
-  } catch (error) {
-      console.log("Error", error)
-      res.json({
-          message:"Payment failed",
-          success: false
-      })
-  }
-}) 
+//   } catch (error) {
+//       console.log("Error", error)
+//       res.json({
+//           message:"Payment failed",
+//           success: false
+//       })
+//   }
+// }) 
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
