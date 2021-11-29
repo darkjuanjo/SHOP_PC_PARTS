@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import Cart from './components/Cart/Cart';
-import data from './Data/data';
+// import data from './Data/data';
 import { useState } from 'react';
 import About from './components/About/index';
 import Profile from './components/Profile';

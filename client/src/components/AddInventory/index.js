@@ -4,10 +4,8 @@ import { ADD_INVENTORY } from '../../utils/mutations';
 
 function AddInventory() {
     const [formState, setFormState] = useState({ description: '', name: '', price: '', stock:'', category: '', image: '' });
-    const { description, name, price, stock, category, image} = formState;
+    const { description, name, price, category, image} = formState;
     const [add_to_Inventory, { error }] = useMutation(ADD_INVENTORY);
-    const priceConvert = Number.parseInt(price);
-    const stockConvert = Number.parseInt(stock);
 
     function handleChange(e) {
         const { name, value } = e.target;
@@ -16,15 +14,14 @@ function AddInventory() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        console.log(formState);
-
+       
+        const stock = parseInt(formState.stock);
         try {
             const { data } = await add_to_Inventory({
-                variables: { description, name, price, stock, category, image}
+                variables: { description, name, price, category, stock, image}
             });
-            console.log(data);
         } catch (e) {
-            console.error(e);
+            console.error(error);
         }
     }
     
