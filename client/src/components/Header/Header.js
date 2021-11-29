@@ -19,6 +19,7 @@ function Header({ countCartItems }) {
     // const location = useLocation();
     const loggedIn = Auth.loggedIn();
     const user = Auth.getProfile();
+    const username = loggedIn? user.data.username : 'guest';
     const location = useLocation();
     return (
         <header className="row block center">
@@ -34,7 +35,7 @@ function Header({ countCartItems }) {
                     <h1>Items</h1>
                 </Link>
             </div>
-            {location.pathname === '/Items'&& user.data.username === 'admin' && (
+            {location.pathname === '/Items'&& username === 'admin' && (
             <div>
             <Link to="/AddInventory">
                     <h1>Add Inventory</h1>
