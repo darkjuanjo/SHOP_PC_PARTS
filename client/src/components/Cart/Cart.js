@@ -15,6 +15,10 @@ function Cart(props) {
         localStorage.removeItem('cartItems');
     }
 
+    function alertUser() {
+        window.alert('Payment method to be added soon! Thanks for trying our demo.')
+    }
+
     return (
         <aside className="block col-1">
             <h2>Cart Items</h2>
@@ -95,7 +99,7 @@ function Cart(props) {
                     <p>Payment Method</p>
                     </div>
 
-                    <button data-testid="button" type="submit" >Submit Order</button>
+                    <button onClick={() => alertUser()}>Submit Order</button>
                     <button onClick={() => setCheckout(false)}>Cancel</button>
                 </form>
             }
