@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from '@apollo/client';
 import { QUERY_ITEMS } from '../../utils/queries';
-import Category from '../Category/Category.js';
+import Featured from "../Featured";
 
 function Main(props) {
     const { onAdd } = props;
@@ -11,12 +11,18 @@ function Main(props) {
         return <div>Loading...</div>;
     }
 
+    var featuredProducts = []
+
+    for (let index = 0; index < 4; index++) {
+        featuredProducts.push(data.items[index]);
+    }
+
     return (
         <main className="block col-2">
-            <h2>Products</h2>
+            <h2 className="featureTitle">Featured Products</h2>
             <div className="flex-row">
-                {data.items.map((category) => (
-                    <Category key={category._id} category={category} onAdd={onAdd}></Category>
+                {featuredProducts.map((product) => (
+                    <Featured key={product._id} product={product} onAdd={onAdd}></Featured>
                 ))};
             </div>
         </main>

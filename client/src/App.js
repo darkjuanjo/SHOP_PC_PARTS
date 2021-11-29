@@ -2,7 +2,6 @@ import React from 'react';
 import Header from './components/Header/Header';
 import Main from './components/Main/Main';
 import Cart from './components/Cart/Cart';
-import data from './Data/data';
 import { useState } from 'react';
 import About from './components/About/index';
 import Profile from './components/Profile';
@@ -35,32 +34,41 @@ function App() {
 
   // const [showItem, setShowItem] = useState(false)
   const [cartItems, setCartItems] = useState([]);
-  const onAdd = (category) => {
-    const cartItem = cartItems.find(item => item._id === category._id);
+  const loadedItems = localStorage.getItem('cartItems');
+  const saveditems = JSON.parse(loadedItems);
+  console.log(saveditems);
+
+  // if (saveditems) {
+  //   setCartItems([saveditems]);
+  // }
+
+  const onAdd = (product) => {
+    const cartItem = cartItems.find(item => item._id === product._id);
     if (cartItem) {
       setCartItems(
         cartItems.map(item =>
-          item._id === category._id ? { ...cartItem, qty: cartItem.qty + 1 } : item
+          item._id === product._id ? { ...cartItem, qty: cartItem.qty + 1 } : item
         )
       );
     }
     else {
-      setCartItems([...cartItems, { ...category, qty: 1 }]);
+      setCartItems([...cartItems, { ...product, qty: 1 }]);
     }
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
   };
 
-  const onRemove = (category) => {
-    const cartItem = cartItems.find((item) => item._id === category._id);
+  const onRemove = (product) => {
+    const cartItem = cartItems.find((item) => item._id === product._id);
     if (cartItem.qty === 1) {
-      setCartItems(cartItems.filter((item) => item._id !== category._id));
+      setCartItems(cartItems.filter((item) => item._id !== product._id));
     } else {
       setCartItems(
         cartItems.map(item =>
-          item._id === category._id ? { ...cartItem, qty: cartItem.qty - 1 } : item
+          item._id === product._id ? { ...cartItem, qty: cartItem.qty - 1 } : item
         )
       );
-
     }
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }
 
   function totalItems() {
@@ -74,7 +82,7 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-      <Header countCartItems={totalItems(cartItems)}></Header>
+        <Header countCartItems={totalItems(cartItems)}></Header>
         <div className="App">
           <Switch>
             <Route exact path="/" render={() =>
@@ -92,7 +100,13 @@ function App() {
               <>
                 <div className="App">
                   <main>
-                    <Cart onAdd={onAdd} onRemove={onRemove} cartItems={cartItems}></Cart>
+                    <Cart
+                      onAdd={onAdd}
+                      onRemove={onRemove}
+                      cartItems={cartItems}
+                      setCartItems={setCartItems}
+                    >
+                    </Cart>
                   </main>
                 </div>
               </>
@@ -100,7 +114,7 @@ function App() {
             />
             <Route exact path="/Profile/:username?" render={() =>
               <>
-                <div className="App">
+                <div className="profilePage">
                   <Profile></Profile>
                 </div>
               </>
@@ -109,7 +123,7 @@ function App() {
             <Route exact path="/Items" render={() =>
               <>
                 <div className="App">
-                  <Items onAdd={onAdd}/>
+                  <Items onAdd={onAdd} />
                 </div>
               </>
             }
