@@ -12,9 +12,7 @@ function Product(props) {
             <div>${product.price}</div>
             {loggedIn && (
                 <div>
-                    <Link to="/Cart">
-                        <button onClick={() => onAdd(product)}>Add to Cart</button>
-                    </Link>
+                    <button onClick={() => onAdd(product)}>Add to Cart</button>
                 </div>
             )}
         </div>
