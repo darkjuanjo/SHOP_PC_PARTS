@@ -13,10 +13,11 @@ function Cart(props) {
         <aside className="block col-1">
             <h2>Cart Items</h2>
             <div>
-                {cartItems.length === 0 && <div> Cart is Empty</div>};
+                {cartItems.length === 0 && <div> Cart is Empty</div>}
             </div>
             {cartItems.map((item) => (
-                <div key={item.id} className="row">
+                <div key={item._id} className="row">
+                    <img src={item.image} className="cart-img" alt="some description"></img>
                     <div className="col-2">{item.name}</div>
                     <div className="col-2">
                         <button onClick={() => onAdd(item)} className="add">+</button>

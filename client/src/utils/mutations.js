@@ -24,59 +24,42 @@ export const ADD_USER = gql`
   }
 `;
 
-export const ADD_THOUGHT = gql`
-  mutation addThought($thoughtText: String!) {
-    addThought(thoughtText: $thoughtText) {
-      _id
-      thoughtText
-      createdAt
-      username
-      reactionCount
-      reactions {
-        _id
-      }
-    }
+export const ADD_INVENTORY = gql`
+mutation add_to_Inventory($name:String!, $price:String!, $category:String!, $description: String!, $stock: Int!, $image:String){
+  add_to_Inventory(name: $name, price: $price, category: $category, description: $description, stock: $stock, image: $image) {
+    _id
+    name
+    price
+    category
+    description
+    stock
+    image
   }
+}
 `;
 
-export const ADD_REACTION = gql`
-  mutation addReaction($thoughtId: ID!, $reactionBody: String!) {
-    addReaction(thoughtId: $thoughtId, reactionBody: $reactionBody) {
-      _id
-      reactionCount
-      reactions {
-        _id
-        reactionBody
-        createdAt
-        username
-      }
-    }
+export const REMOVE_INVENTORY = gql`
+mutation delete_from_Inventory($name:String!){
+  delete_from_Inventory(name: $name) {
+    _id
+    name
+    price
+    category
+    description
+    stock
+    image
   }
+}
 `;
 
-export const ADD_FRIEND = gql`
-  mutation addFriend($id: ID!) {
-    addFriend(friendId: $id) {
-      _id
-      username
-      friendCount
-      friends {
-        _id
-        username
-      }
-    }
-  }
+export const ADD_ORDER = gql`
+mutation addOrder($input:[Order]!,$cost:Float!){
+  addOrder(product:$input,cost:$cost ){
+    _id
+    username
+    email
+    orders
+  }  
+}
 `;
 
-export const REMOVE_FRIEND = gql`
-  mutation removeFriend($id: ID!) {
-    removeFriend(id: $id) {
-      _id
-      username
-      friends {
-        _id
-        username
-      }
-    }
-  }
-`;

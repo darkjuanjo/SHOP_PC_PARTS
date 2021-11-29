@@ -2,7 +2,15 @@ import decode from 'jwt-decode';
 
 class AuthService {
   getProfile() {
-    return decode(this.getToken());
+    const token = this.getToken() || null;
+    if(token !== null)
+    {
+      if(this.loggedIn && !this.isTokenExpired(token))
+      {
+      return decode(this.getToken());
+      }
+    }
+    else return {}
   }
 
   loggedIn() {

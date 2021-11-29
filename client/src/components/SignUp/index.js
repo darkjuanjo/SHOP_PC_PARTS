@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-// import { useMutation } from '@apollo/react-hooks';
-// import { ADD_USER } from '../utils/mutations';
-// import Auth from '../utils/auth';
+import { useMutation } from '@apollo/client';
+import { ADD_USER } from '../../utils/mutations';
+import Auth from '../../utils/auth';
 
-const Modal = ({ onClose }) => {
+const SignUp = ({ onClose }) => {
     const [formState, setFormState] = useState({ username: '', email: '', password: '' });
-    // const [addUser, { error }] = useMutation(ADD_USER);
+    const [addUser, { error }] = useMutation(ADD_USER);
     const { username, email, password } = formState;
 
     function handleChange(e) {
@@ -18,17 +18,17 @@ const Modal = ({ onClose }) => {
   // submit form
   const handleFormSubmit = async event => {
     event.preventDefault();
-    console.log(formState)
-
-    // try {
-    //   const { data } = await addUser({
-    //     variables: { ...formState }
-    //   });
-
-    //   Auth.login(data.addUser.token);
-    // } catch (e) {
-    //   console.error(e);
-    // }
+    console.log(formState);
+    
+    try {
+      const { data } = await addUser({
+        variables: { username, email, password }
+      });
+      window.alert('Account has been created!');
+    } catch (e) {
+      console.error(e);
+    }
+    
   };
 
     return (
@@ -37,7 +37,7 @@ const Modal = ({ onClose }) => {
                 <h3 className="modalTitle">Create an account</h3>
                             <form onSubmit={handleFormSubmit}>
               <input
-                className="form-input"
+                className="my-1"
                 placeholder="Your username"
                 name="username"
                 type="username"
@@ -46,7 +46,7 @@ const Modal = ({ onClose }) => {
                 onChange={handleChange}
               />
               <input
-                className="form-input"
+                className="my-1"
                 placeholder="Your email"
                 name="email"
                 type="email"
@@ -55,7 +55,7 @@ const Modal = ({ onClose }) => {
                 onChange={handleChange}
               />
               <input
-                className="form-input"
+                className="my-1"
                 placeholder="******"
                 name="password"
                 type="password"
@@ -68,9 +68,10 @@ const Modal = ({ onClose }) => {
               </button>
             </form>
                 <button onClick={onClose} type="button">Close</button>
+                {error && <div>Sign up failed. Verify your entries.</div>}
             </div>
         </div>
     );
 }
 
-export default Modal;
+export default SignUp;

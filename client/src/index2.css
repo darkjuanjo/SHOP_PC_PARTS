@@ -97,7 +97,7 @@ header {
 }
 
 header a {
-  color: var(--light);
+  color: darkblue;
 }
 
 /* button {
@@ -255,7 +255,7 @@ textarea {
 }
 
 .modalContainer {
-	background: var(--darker);
+	background: var(--light);
 	border-radius: 5px;
 	max-width: 100%;
 	margin: 50px auto;

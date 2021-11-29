@@ -9,8 +9,8 @@ const InventorySchema = new Schema(
       required: true,
       maxlength: 280
     },
-    cost: {
-      type: String,
+    price: {
+      type: Number,
       required: true
     },
     category: {
@@ -25,7 +25,10 @@ const InventorySchema = new Schema(
     stock: {
       type: Number,
       required: true
-    },    
+    },
+    image:{
+      type:String
+    },  
     AddedAt: {
       type: Date,
       default: Date.now,

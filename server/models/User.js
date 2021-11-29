@@ -30,11 +30,12 @@ const userSchema = new Schema(
 
 // set up pre-save middleware to create password
 userSchema.pre('save', async function(next) {
+  console.log(this.password);
+  console.log(this.isNew);
   if (this.isNew || this.isModified('password')) {
     const saltRounds = 10;
     this.password = await bcrypt.hash(this.password, saltRounds);
   }
-
   next();
 });
 

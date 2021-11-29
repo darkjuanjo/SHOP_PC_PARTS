@@ -24,6 +24,7 @@ const resolvers = {
       return User.findOne({ username })
         .select('-__v -password')
         .populate('history')
+      // return user;
     },
     items: async (parent, { category }) => {
       const params = category ? { category } : {};
@@ -32,41 +33,49 @@ const resolvers = {
     item: async (parent, { name }) => {
       return Inventory.findOne({ name });
     },
-    getOrder: async (parent, {order}, context) => {
-      if(context.user) {
-       return await Order.findById({ _id:order }) //find the order
-       .then(response => { 
-  return Product.find({ '_id':{$in: response.products}}) //this returns list of products id
-        .then(items => {
-          let _id = [];
-          let qty = [];
-          items.forEach(item => {
-            _id.push(item.product);
-            qty.push(item.qty);
-          });
-    return Inventory.find({'_id':{$in:_id}})
-          .then(items => {
-            const purchase_array = [];
-            items.forEach((item,i) => {
-              const purchase = {
-                item: item,
-                qty:  qty[i]
-              }
-              purchase_array.push(purchase);
-            });
-            return purchase_array;
-          });      
-        });
-       })
+    getOrders: async (parent, { orders }, context) => {
+      //get order objects
+      const order_array = [];
+      const products_array = [];
+      const items_array = [];
+      //get orders
+      for (let i = 0; i < orders.length; i++) {
+        const object = await Order.findOne({ '_id': orders[i] });
+        order_array.push(object);
       }
-    }
+      for (let i = 0; i < order_array.length; i++) {
+        const temp = [];
+        for (let ii = 0; ii < order_array[i].products.length; ii++) {
+          const item_id = await Product.findOne({ '_id': order_array[i].products[ii] });
+          const item = await Inventory.findOne({ '_id': item_id.product });
+
+          temp.push({
+            _id: item._id,
+            name: item.name,
+            price: item.price,
+            category: item.category,
+            description: item.description,
+            image: item.image,
+            qty_bought: item_id.qty
+          });
+        }
+        const order = {
+          order_id: order_array[i]._id,
+          products: temp,
+          order_cost: order_array[i].OrderCost
+        }
+        products_array.push(order);
+      }
+      return products_array;
+    },
   },
 
   Mutation: {
     addUser: async (parent, args) => {
       const user = await User.create(args);
       const token = signToken(user);
-
+      console.log(user);
+      console.log(token);
       return { token, user };
     },
     login: async (parent, { email, password }) => {
@@ -85,24 +94,53 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    add_to_Inventory: async (parent, args) => {
-      const item = await Inventory.create(args);
-      return item;
+    add_to_Inventory: async (parent, args, context) => {
+      if (context.user.username === 'admin') {
+        const item = await Inventory.create(args);
+        console.log('Your item is: ' + item);
+        return item;
+      }
+      return {}
     },
-    addOrder: async (parent, {product, cost}, context) => {
-      if(context.user) {
+    delete_from_Inventory: async (parent, { name }, context) => {
+      if (context.user.username === 'admin') {
+        const item = await Inventory.deleteOne({ name: name });
+        return item;
+      }
+      return {}
+    },
+    addOrder: async (parent, { product, cost }, context) => {
+      if (context.user) {
         ids = [];
         const products = await Product.insertMany(product);
-              products.forEach(product => ids.push(product._id));
+        products.forEach(product => ids.push(product._id));
 
-        const order = await Order.create({products:products, OrderCost:cost});
+        const order = await Order.create({ products: products, OrderCost: cost });
         return await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $push: { orders : order._id } },
+          { $push: { orders: order._id } },
           { new: true }
         );
       }
     },
+    editUser: async (parent, { input, username }, context) => {
+      if (context.user) {
+        const user = username === undefined || username === "" ? context.user.username : username;
+        return await User.findOneAndUpdate({ username: user }, input, { new: true });
+      }
+    },
+    deleteUser: async (parent, { username }, context) => {
+      if (context.user) {
+        const removed_user = await User.deleteOne({ username: username });
+        console.log(removed_user);
+        if (removed_user.deletedCount) {
+          return `User: ${username} deleted successfully!`
+        }
+        else
+          return `Error Unable to delete ${username}`
+
+      }
+    }
   }
 };
 
