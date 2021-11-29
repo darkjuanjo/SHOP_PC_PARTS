@@ -115,7 +115,7 @@ function App() {
             <Route exact path="/Profile/:username?" render={() =>
               <>
                 <div className="profilePage">
-                  <Profile></Profile>
+                  <Profile cartItems={cartItems} ></Profile>
                 </div>
               </>
             }
