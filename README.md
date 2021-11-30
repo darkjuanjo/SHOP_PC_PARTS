@@ -15,7 +15,11 @@ right now, the checkout feature has not been implemented. Only the place holders
 Click here - https://shop-pc-parts.herokuapp.com/
 
 ### Screenshots
+# Homepage
 ![Homepage](./Homepage.JPG)
-![Homepage](./Featured.JPG)
-![Homepage](./inventory.JPG)
-![Homepage](./cart.JPG)
+# Featured Products
+![Featured](./Featured.JPG)
+# Inventory
+![inventory](./inventory.JPG)
+# Cart Page
+![cart](./cart.JPG)
